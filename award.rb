@@ -1,3 +1,9 @@
+require 'award_updater'
+require 'normal_updater'
+require 'blue_first_updater'
+require 'blue_compare_updater'
+require 'blue_star_updater'
+
 class Award
   attr_reader :name, :updater
   attr_accessor :expires_in, :quality
