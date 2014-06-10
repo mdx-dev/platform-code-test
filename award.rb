@@ -1,21 +1,16 @@
 class Award
   attr_reader :name, :updater
   attr_accessor :expires_in, :quality
+  UPDATER_CLASSES = {
+    "NORMAL ITEM" => NormalUpdater,
+    "Blue First" => BlueFirstUpdater,
+    "Blue Compare" => BlueCompareUpdater,
+    "Blue Star" => BlueStarUpdater
+  }
   
   def initialize(name, expires_in, quality)
     @name, @expires_in, @quality = name, expires_in, quality
-    @updater = case name
-    when "NORMAL ITEM"
-      NormalUpdater.new
-    when "Blue First"
-      BlueFirstUpdater.new
-    when "Blue Compare"
-      BlueCompareUpdater.new
-    when "Blue Star"
-      BlueStarUpdater.new
-    else
-      AwardUpdater.new
-    end
+    @updater = UPDATER_CLASSES.fetch(name, AwardUpdater).new
   end
 
   def update
