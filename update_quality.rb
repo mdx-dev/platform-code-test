@@ -1,4 +1,4 @@
-require 'award'
+require 'awards'
 
 # Updates quality for all given awards. Also reduces expires_in by 1 for all awards.
 def update_quality(awards)
