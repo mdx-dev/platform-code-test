@@ -38,3 +38,5 @@ build/
 
 # ignore gems installed into vendor
 /vendor
+
+# test commit as edposnak
