@@ -21,15 +21,15 @@ class Award
   def set_award_type(name, expires_in, quality)
     case name
     when 'Blue Distinction Plus'
-      BlueDistinctionPlus.new(name, expires_in, quality)
+      BlueDistinctionPlus.new(expires_in, quality)
     when 'Blue Compare'
-      BlueCompare.new(name, expires_in, quality)
+      BlueCompare.new(expires_in, quality)
     when 'Blue First'
-      BlueFirst.new(name, expires_in, quality)
+      BlueFirst.new(expires_in, quality)
     when 'Blue Star'
-      BlueStar.new(name, expires_in, quality)
+      BlueStar.new(expires_in, quality)
     else
-      NormalAward.new(name, expires_in, quality)
+      NormalAward.new(expires_in, quality)
     end
   end
 end
@@ -37,7 +37,7 @@ end
 class NormalAward < Award
   attr_reader :day
 
-  def initialize(name, expires_in, quality)
+  def initialize(expires_in, quality)
     @expires_in = expires_in
     @quality = quality
     @max_score = 50
@@ -63,7 +63,7 @@ end
 # Add distinct rules for any future awards here
 
 class BlueDistinctionPlus < NormalAward
-  def initialize(name, expires_in, quality)
+  def initialize(expires_in, quality)
     super
     @day = 0
   end
