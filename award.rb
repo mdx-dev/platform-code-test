@@ -60,8 +60,6 @@ class NormalAward < Award
   end
 end
 
-# Add distinct rules for any future awards here
-
 class BlueDistinctionPlus < NormalAward
   def initialize(expires_in, quality)
     super
@@ -103,4 +101,5 @@ class BlueStar < NormalAward
   end
 end
 
+# Add distinct rules for any future awards here
 
