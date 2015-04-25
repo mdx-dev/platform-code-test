@@ -9,10 +9,18 @@ def update_quality(awards)
       expired = false
     end
     case award.name
-    when 'Blue First'
-      award.quality += 1
+    when 'Blue Compare'
       if expired
-        award.quality += 1
+        award.quality = 0
+      else
+        case award.expires_in
+        when (6..10)
+          award.quality += 2
+        when (0..5)
+          award.quality += 3
+        else
+          award.quality += 1
+        end
       end
       if award.quality > 50
         award.quality = 50
@@ -21,18 +29,10 @@ def update_quality(awards)
       award.quality = 80
 # don't change expire date
       award.expires_in += 1
-    when 'Blue Compare'
+    when 'Blue First'
+      award.quality += 1
       if expired
-        award.quality = 0
-      else
-        case award.expires_in + 1
-        when (6..10)
-          award.quality += 2
-        when (0..5)
-          award.quality += 3
-        else
-          award.quality += 1
-        end
+        award.quality += 1
       end
       if award.quality > 50
         award.quality = 50
