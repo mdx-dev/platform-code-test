@@ -29,8 +29,9 @@ def update_quality(awards)
 # don't change expire date
       award.expires_in += 1
     when 'Blue First'
-      award.quality += 1
       if expired
+        award.quality += 2
+      else
         award.quality += 1
       end
     when 'Blue Star'
