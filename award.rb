@@ -19,21 +19,6 @@ class Award
     @expires_in -= @award_type.day
   end
 
-  def set_award_type(name, expires_in, quality)
-    case name
-    when 'Blue Distinction Plus'
-      BlueDistinctionPlus.new(expires_in, quality)
-    when 'Blue Compare'
-      BlueCompare.new(expires_in, quality)
-    when 'Blue First'
-      BlueFirst.new(expires_in, quality)
-    when 'Blue Star'
-      BlueStar.new(expires_in, quality)
-    else
-      BaseAward.new(expires_in, quality)
-    end
-  end
-
   Class BaseAward < Award
     attr_reader :day_change
     def initialize(expires_in, quality)
@@ -109,4 +94,20 @@ class Award
       check_quality
     end
   end
+  
+  def set_award_type(name, expires_in, quality)
+    case name
+    when 'Blue Distinction Plus'
+      BlueDistinctionPlus.new(expires_in, quality)
+    when 'Blue Compare'
+      BlueCompare.new(expires_in, quality)
+    when 'Blue First'
+      BlueFirst.new(expires_in, quality)
+    when 'Blue Star'
+      BlueStar.new(expires_in, quality)
+    else
+      BaseAward.new(expires_in, quality)
+    end
+  end
+
 end
