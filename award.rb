@@ -17,10 +17,10 @@ class Award
 
   def set_award_type(name, expires_in, quality)
     case name
-#    when 'Blue Distinction Plus'
-#      BlueDistinctionPlus.new(expires_in, quality)
     when 'Blue Compare'
       BlueCompare.new(expires_in, quality)
+    when 'Blue Distinction Plus'
+      BlueDistinctPlus.new(expires_in, quality)
 #    when 'Blue First'
 #      BlueFirst.new(expires_in, quality)
 #    when 'Blue Star'
@@ -69,7 +69,6 @@ end
 
 class BlueCompare < BaseAward
   def update
-    move_day
     if expired
       @quality = 0
     else
@@ -82,6 +81,18 @@ class BlueCompare < BaseAward
         @quality += 1
       end
     end
+    check_quality
+  end
+end
+
+class BlueDistinctPlus < BaseAward
+  def initialize(expires_in, quality)
+    super
+    @day_change = 0
+    @max_quality = 80
+  end
+  def update
+    @quality = @max_quality
     check_quality
   end
 end
