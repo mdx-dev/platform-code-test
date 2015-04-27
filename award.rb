@@ -21,10 +21,10 @@ class Award
       BlueCompare.new(expires_in, quality)
     when 'Blue Distinction Plus'
       BlueDistinctPlus.new(expires_in, quality)
-#    when 'Blue First'
-#      BlueFirst.new(expires_in, quality)
-#    when 'Blue Star'
-#      BlueStar.new(expires_in, quality)
+    when 'Blue First'
+      BlueFirst.new(expires_in, quality)
+    when 'Blue Star'
+      BlueStar.new(expires_in, quality)
     else
       BaseAward.new(expires_in, quality)
     end
@@ -93,6 +93,20 @@ class BlueDistinctPlus < BaseAward
   end
   def update
     @quality = @max_quality
+    check_quality
+  end
+end
+
+class BlueFirst < BaseAward
+  def update
+    (expired) ? @quality += 2 : @quality += 1
+    check_quality
+  end
+end
+
+class BlueStar < BaseAward
+  def update
+    (expired) ? @quality -= 4 : @quality -= 2
     check_quality
   end
 end
