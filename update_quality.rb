@@ -6,9 +6,16 @@ def update_quality(awards)
     if award.name == 'NORMAL ITEM'
       award.expires_in -= 1
       return if award.quality == 0
-
       award.quality -= 1
       award.quality -= 1 if award.expires_in <= 0
+    end
+
+    if award.name == 'Blue First'
+      award.expires_in -= 1
+      return if award.quality == 50
+      award.quality += 1
+      return if award.quality == 50
+      award.quality += 1 if award.expires_in <= 0
     end
 
 
