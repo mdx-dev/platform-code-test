@@ -1,0 +1,10 @@
+
+1) To add Blue Star award business rules, look for the rules that decrement quality and add code for this new award there. This resulted in working_update_quality.rb
+
+2) The code in update_quality.rb is convoluted with nested ifs making the code difficult to extend, change and maintain. Separating code rules for each award resulted in refactor_update_quality_1.rb
+
+3) The refactored code is long and repetitive making this code also difficult to understand though slightly better to extend because the rules for each award are separate. The ternary operator is used to make the code shorter and this resulted in refactored code which is now the new update_quality.rb
+
+4) update_quality_spec.rb was changed; the line before {pending} was commented out to test Blue Star award code
+
+5) Award interface was not changed to preserve backward compatibility

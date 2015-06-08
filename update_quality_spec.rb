@@ -2,7 +2,7 @@ require 'rspec'
 require 'update_quality'
 
 describe '#update_quality' do
-
+  begin_time = Time.now
   context 'Given a single award' do
     let(:initial_expires_in) { 5 }
     let(:initial_quality) { 10 }
@@ -177,7 +177,7 @@ describe '#update_quality' do
       end
 
       context 'given a Blue Star award' do
-        before { pending }
+        #before { pending }
         let(:name) { 'Blue Star' }
         before { award.expires_in.should == initial_expires_in-1 }
 
@@ -234,4 +234,6 @@ describe '#update_quality' do
       specify { expect(awards[1].expires_in).to eq(2) }
     end
   end
+  end_time = Time.now
+  puts "Time elapsed=#{(end_time - begin_time)} "
 end
