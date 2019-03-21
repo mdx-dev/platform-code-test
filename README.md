@@ -64,4 +64,7 @@ To test your work, run the default rake task:
 
     rake
 
+## Finishing Up
+
+- Please fork the repo and push your completed code to a public github repository.
 
