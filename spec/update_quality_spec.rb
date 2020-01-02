@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rspec'
 require 'update_quality'
 
 describe '#update_quality' do
-
   context 'Given a single award' do
     let(:initial_expires_in) { 5 }
     let(:initial_quality) { 10 }
@@ -18,24 +19,24 @@ describe '#update_quality' do
 
         before do
           # ensure normal awards decline in quality after date of award
-          expect(award.expires_in).to eq(initial_expires_in-1)
+          expect(award.expires_in).to eq(initial_expires_in - 1)
         end
 
         context 'before expiration date' do
           # Quality decreases daily prior to expiration
-          specify { expect(award.quality).to eq(initial_quality-1) }
+          specify { expect(award.quality).to eq(initial_quality - 1) }
         end
 
         context 'on expiration date' do
           # quality decreases on expiration day
           let(:initial_expires_in) { 0 }
-          specify { expect(award.quality).to eq(initial_quality-2) }
+          specify { expect(award.quality).to eq(initial_quality - 2) }
         end
 
         context 'after expiration date' do
           # quality unchanged after expiration day
           let(:initial_expires_in) { -10 }
-          specify { expect(award.quality).to eq(initial_quality-2) }
+          specify { expect(award.quality).to eq(initial_quality - 2) }
         end
 
         context 'of zero quality' do
@@ -50,12 +51,12 @@ describe '#update_quality' do
 
         before do
           # Verify that this is always true in the current context
-          award.expires_in.should == initial_expires_in-1
+          award.expires_in.should == initial_expires_in - 1
         end
 
         context 'before expiration date' do
           # Quality increases over time
-          specify { expect(award.quality).to eq(initial_quality+1) }
+          specify { expect(award.quality).to eq(initial_quality + 1) }
 
           context 'with max quality' do
             let(:initial_quality) { 50 }
@@ -66,7 +67,7 @@ describe '#update_quality' do
         context 'on expiration date' do
           let(:initial_expires_in) { 0 }
           # Increment quality on expiration date
-          specify { expect(award.quality).to eq(initial_quality+2) }
+          specify { expect(award.quality).to eq(initial_quality + 2) }
 
           context 'near max quality' do
             let(:initial_quality) { 49 }
@@ -84,7 +85,7 @@ describe '#update_quality' do
         context 'after expiration date' do
           let(:initial_expires_in) { -10 }
           # Quality increases at double rate after expiration
-          specify { expect(award.quality).to eq(initial_quality+2) }
+          specify { expect(award.quality).to eq(initial_quality + 2) }
 
           context 'with max quality' do
             let(:initial_quality) { 50 }
@@ -100,7 +101,7 @@ describe '#update_quality' do
 
         before do
           # Verify that this is always true in the current context
-          award.expires_in.should == initial_expires_in-1
+          award.expires_in.should == initial_expires_in - 1
         end
 
         context 'before expiration date' do
@@ -126,13 +127,13 @@ describe '#update_quality' do
 
         before do
           # Verify that this is always true in the current context
-          award.expires_in.should == initial_expires_in-1
+          award.expires_in.should == initial_expires_in - 1
         end
 
         context 'long before expiration date' do
           let(:initial_expires_in) { 11 }
           # quality increases as expiration approaches
-          specify { expect(award.quality).to eq(initial_quality+1) }
+          specify { expect(award.quality).to eq(initial_quality + 1) }
 
           context 'at max quality' do
             let(:initial_quality) { 50 }
@@ -143,7 +144,7 @@ describe '#update_quality' do
         context 'medium close to expiration date (upper bound)' do
           let(:initial_expires_in) { 10 }
           # quality+=2 when expire > 5 && <= 10
-          specify { expect(award.quality).to eq(initial_quality+2) }
+          specify { expect(award.quality).to eq(initial_quality + 2) }
 
           context 'at max quality' do
             let(:initial_quality) { 50 }
@@ -154,7 +155,7 @@ describe '#update_quality' do
         context 'medium close to expiration date (lower bound)' do
           let(:initial_expires_in) { 6 }
           # quality+=2 when expire > 5 && <= 10
-          specify { expect(award.quality).to eq(initial_quality+2) }
+          specify { expect(award.quality).to eq(initial_quality + 2) }
 
           context 'at max quality' do
             let(:initial_quality) { 50 }
@@ -165,7 +166,7 @@ describe '#update_quality' do
         context 'very close to expiration date (upper bound)' do
           let(:initial_expires_in) { 5 }
           # quality+=3 when expire =< 0 && <= 5
-          specify { expect(award.quality).to eq(initial_quality+3) }
+          specify { expect(award.quality).to eq(initial_quality + 3) }
 
           context 'at max quality' do
             let(:initial_quality) { 50 }
@@ -176,7 +177,7 @@ describe '#update_quality' do
         context 'very close to expiration date (lower bound)' do
           let(:initial_expires_in) { 1 }
           # quality+=3 when expire =< 0 && <= 5
-          specify { expect(award.quality).to eq(initial_quality+3) }
+          specify { expect(award.quality).to eq(initial_quality + 3) }
 
           context 'at max quality' do
             let(:initial_quality) { 50 }
@@ -202,13 +203,13 @@ describe '#update_quality' do
 
         before do
           # Verify that this is always true in the current context
-          award.expires_in.should == initial_expires_in-1
+          award.expires_in.should == initial_expires_in - 1
         end
 
         context 'before the expiration date' do
           let(:initial_expires_in) { 5 }
           # Blue Star loses quality at 2x normal rate
-          specify { expect(award.quality).to eq(initial_quality-2) }
+          specify { expect(award.quality).to eq(initial_quality - 2) }
 
           context 'at zero quality' do
             let(:initial_quality) { 0 }
@@ -220,7 +221,7 @@ describe '#update_quality' do
         context 'on expiration date' do
           let(:initial_expires_in) { 0 }
           # Continue to degrade on expiration date
-          specify { expect(award.quality).to eq(initial_quality-4) }
+          specify { expect(award.quality).to eq(initial_quality - 4) }
 
           context 'at zero quality' do
             let(:initial_quality) { 0 }
@@ -232,7 +233,7 @@ describe '#update_quality' do
         context 'after expiration date' do
           let(:initial_expires_in) { -10 }
           # Quality degrades at 4x after expiration
-          specify { expect(award.quality).to eq(initial_quality-4) }
+          specify { expect(award.quality).to eq(initial_quality - 4) }
 
           context 'at zero quality' do
             let(:initial_quality) { 0 }
@@ -245,13 +246,13 @@ describe '#update_quality' do
   end
 
   context 'Given several award' do
-    let(:awards) {
+    let(:awards) do
       [
         Award.new('NORMAL ITEM', 5, 10),
         Award.new('Blue First', 3, 10),
-        Award.new('Blue Star', 5, 10),
+        Award.new('Blue Star', 5, 10)
       ]
-    }
+    end
 
     context 'when quality is updated' do
       before do

@@ -1,0 +1,5 @@
+Metrics/BlockLength:
+  Max: 250
+
+Metrics/MethodLength:
+  Max: 25

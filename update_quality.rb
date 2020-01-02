@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'award'
 
 # Blue First increases quality over time
@@ -17,7 +19,7 @@ end
 #   expires <= 5 && > 0
 #   quality == 0 after expiration date
 def update_blue_compare(award)
-  if award.expires_in > 0
+  if award.expires_in.positive?
     award.quality += 1
     award.quality += 1 if award.expires_in < 11
     award.quality += 1 if award.expires_in < 6
@@ -42,7 +44,7 @@ def enforce_quality_limits(award)
   return if award.name == 'Blue Distinction Plus'
 
   award.quality = 50 if award.quality > 50
-  award.quality = 0 if award.quality < 0
+  award.quality = 0 if award.quality.negative?
 end
 
 def update_quality(awards)
