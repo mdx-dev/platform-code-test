@@ -11,7 +11,7 @@ jobs:
           name: setup
           command: ~/project/ci/setup-env.sh
       - run: 
-          name: run rspec
+          name: run rubocop
           command: bundle exec rubocop
   rspec:
     docker:
