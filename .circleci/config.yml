@@ -1,18 +1,5 @@
 version: 2
 jobs:
-  rspec:
-    docker:
-      - image: circleci/ruby:2.6.0-node
-        environment:
-          BUNDLER_VERSION: 2.0.0
-    steps:
-      - checkout
-      - run:  
-          name: setup
-          command: ~/project/ci/setup-env.sh
-      - run: 
-          name: run rspec
-          command: bundle exec rubocop
   rubocop:
     docker:
       - image: circleci/ruby:2.6.0-node
@@ -25,9 +12,23 @@ jobs:
           command: ~/project/ci/setup-env.sh
       - run: 
           name: run rspec
-          command: rake
+          command: bundle exec rubocop
+  rspec:
+    docker:
+      - image: circleci/ruby:2.6.0-node
+        environment:
+          BUNDLER_VERSION: 2.0.0
+    steps:
+      - checkout
+      - run:  
+          name: setup
+          command: ~/project/ci/setup-env.sh
+      - run: 
+          name: run rspec
+          command: bundle exec rake
+workflows:
   version: 2
-  verify_scripts:
+  ruby_tests:
     jobs:
       - rspec
       - rubocop

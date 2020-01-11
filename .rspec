@@ -1,1 +1,1 @@
---pattern spec/**/*.rb
+-I. --color --pattern spec/**/*.rb
