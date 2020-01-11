@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'award'
+require_relative 'award'
 
 def update_quality(awards)
   awards.each do |award|
