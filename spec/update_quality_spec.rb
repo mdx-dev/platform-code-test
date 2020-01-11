@@ -91,7 +91,7 @@ describe '#update_quality' do
 
         before do
           # Verify that this is always true in the current context
-          award.expires_in.should == initial_expires_in
+          award.expires_in.should == initial_expires_in - 1
         end
 
         context 'before expiration date' do
@@ -178,7 +178,6 @@ describe '#update_quality' do
       end
 
       context 'given a Blue Star award' do
-        before { pending }
         let(:name) { 'Blue Star' }
         before { award.expires_in.should == initial_expires_in - 1 }
 

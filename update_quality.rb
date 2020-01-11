@@ -59,7 +59,7 @@ def age_blue_compare_quality(award)
 end
 
 def check_quality_limits(award)
-  # 'Blue Distinction Plus' is static
+  # 'Blue Distinction Plus' quality is static
   return if award.name == 'Blue Distinction Plus'
 
   # make sure 0 <= quality <= 50
@@ -71,10 +71,7 @@ def check_quality_limits(award)
 end
 
 def update_age(award)
-  # 'Blue Distinction Plus' is static
-  return if award.name == 'Blue Distinction Plus'
-
-  # else reduce exparation date
+  # reduce exparation date
   award.expires_in -= 1
 end
 
