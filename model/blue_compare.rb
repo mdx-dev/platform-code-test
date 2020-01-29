@@ -1,0 +1,2 @@
+class BlueCompare
+end
