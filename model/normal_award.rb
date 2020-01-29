@@ -8,7 +8,8 @@ class NormalAward
   end
 
   def update!
-    @quality = [@quality-1, 0].max
+    diff = expires_in > 0 ? 1 : 2
+    @quality = [@quality - diff, 0].max
     @expires_in -= 1
   end
 end
