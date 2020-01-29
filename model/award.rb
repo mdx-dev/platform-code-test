@@ -1,16 +1,32 @@
-class Award
-  attr_accessor :name, :expires_in, :quality
+require_relative 'normal_award'
 
+class Award
   def initialize(name, expires_in, quality)
-    @name = name
-    @expires_in = expires_in
-    @quality = quality
+    @type = init_type(name, expires_in, quality)
+  end
+
+  def update!
+    @type.update!
+  end
+
+  ['name', 'expires_in', 'quality'].each do |attribute|
+    define_method "#{attribute}" do
+      @type.send(attribute)
+    end
+  end
+
+  private
+
+  def init_type(name, expires_in, quality)
+    case name
+    when 'Blue First'
+      BlueFirst.new(name, expires_in, quality)
+    when 'Blue Distinction Plus'
+      BlueDistPlus.new(name, expires_in, quality)
+    when 'Blue Compare'
+      BlueCompare.new(name, expires_in, quality)
+    else
+      NormalAward.new(name, expires_in, quality)
+    end
   end
 end
-
-# TODO
-# Blue First
-# Blue Compare
-# Blue Distinction Plus
-# Blue Star
-
