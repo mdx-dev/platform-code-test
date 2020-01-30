@@ -1,5 +1,6 @@
 require_relative 'normal_award'
 require_relative 'blue_first'
+require_relative 'blue_dist_plus'
 
 class Award
   def initialize(name, expires_in, quality)
