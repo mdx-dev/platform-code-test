@@ -7,6 +7,7 @@ class NormalAward
     @quality = quality
   end
 
+  # Normal award degrades twice once the expiration date has passed
   def update!
     diff = expires_in > 0 ? 1 : 2
     @quality = [@quality - diff, 0].max

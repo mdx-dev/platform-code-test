@@ -4,6 +4,11 @@ class BlueCompare < NormalAward
   LONG_EXPIRED = 10
   MEDIUM_EXPIRED = 5
 
+  # Blue Compare increase value each day before expires
+  # Increase 2 under 10 days
+  # Increase 3 under 5 days
+  # Become 0 when it expires
+
   def update!
     if @expires_in > LONG_EXPIRED
       add = 1
