@@ -1,7 +1,9 @@
-class BlueFirst
-  def initialize(name, expires_in, quality)
-    @name = name
-    @expires_in = expires_in
-    @quality = quality
+require_relative 'normal_award'
+
+class BlueFirst < NormalAward
+  def update!
+    add = expires_in > 0 ? 1 : 2
+    @quality = [@quality + add, 50].min
+    @expires_in -= 1
   end
 end
