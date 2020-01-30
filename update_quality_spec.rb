@@ -106,6 +106,11 @@ describe '#update_quality' do
           let(:initial_expires_in) { -10 }
           specify { expect(award.quality).to eq(initial_quality) }
         end
+
+        context 'with non-80 quality value' do
+          let(:initial_quality) { 0 }
+          specify { expect(award.quality).to eq(80) }
+        end
       end
 
       context 'given Blue Compare' do
