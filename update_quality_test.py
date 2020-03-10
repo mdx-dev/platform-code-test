@@ -90,3 +90,14 @@ def test_blue_star(initial_expires_in, initial_quality, expected_quality):
     update_quality([award])
     assert award.expires_in == initial_expires_in - 1
     assert award.quality == expected_quality
+
+
+def test_several_awards():
+    award1 = Award(name = 'NORMAL ITEM', expires_in = 5, quality = 10)
+    award2 = Award(name = 'Blue First', expires_in = 3, quality = 10)
+    update_quality([award1, award2])
+
+    assert award1.quality == 9
+    assert award1.expires_in == 4
+    assert award2.quality == 11
+    assert award2.expires_in == 2
