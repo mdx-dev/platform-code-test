@@ -42,9 +42,9 @@ During Sprint Planning, you estimated the story to be between 1 and 3 story poin
 
 The existing code is "legacy", and, ugh, it's ugly. Feel free to make any changes to the code as long as everything still works correctly and all specs pass. (Although, note that Awards are used elsewhere in the system, so their public interface must remain backward compatible).
 
-## Installation Hints
+## Installation Hints (Ruby)
 
-The easiest way is to use bundler to install the dependencies. To do so, you need to install the bundler gem if you havent already done so
+The easiest way is to use bundler to install the dependencies. To do so, you need to install the bundler gem if you haven't already done so
 
     gem install bundler
 
@@ -58,11 +58,36 @@ and should be ready to go. Alternatively, you can install the dependencies one b
 
 Have a look at the Gemfile for all dependencies.
 
-## Testing
+## Installation Hints (Python)
+
+The easiest way is to use pipenv to install the dependencies. To do so, you need to install pipenv if you haven't already done so
+
+    pip install --user pipenv
+
+run pipenv
+
+    pipenv install
+
+and should be ready to go. Alternatively, you can install the dependencies one by one using pip, e.g.
+
+    pip install -U pytest
+
+Have a look at the Pipfile for all dependencies.
+
+## Testing (Ruby)
 
 To test your work, run the default rake task:
 
     rake
+
+## Testing (Python)
+
+To test your work, run pytest:
+
+    # with pipenv
+    pipenv run pytest
+    # without pipenv
+    pytest
 
 ## Finishing Up
 
