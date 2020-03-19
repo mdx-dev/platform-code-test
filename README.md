@@ -40,7 +40,7 @@ Here is the business story:
 
 During Sprint Planning, you estimated the story to be between 1 and 3 story points (in general, this corresponds to a few hours to a couple of days). We have committed to complete this by the end of our Sprint which ends soon. Please fork the code and submit a link to your fork with your changes when you have completed the assignment.
 
-The existing code is "legacy", and, ugh, it's ugly. Feel free to make any changes to the code as long as everything still works correctly and all specs pass. (Although, note that Awards are used elsewhere in the system, so their public interface must remain backward compatible).
+The existing code is “legacy”, and, ugh, it’s ugly. We’re attempting to move the legacy code toward a more object-oriented approach, and this would could be a good time to refactor. Feel free to make any changes to the code as long as everything still works correctly and all specs pass.
 
 ## Installation Hints (Ruby)
 
