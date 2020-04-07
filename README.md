@@ -1,4 +1,4 @@
-# Vitals Code Test
+# Sapphire Digital Code Test
 
 # Description
 Hi, and welcome to the team! As you know, we provide tools for searching for doctors and hospitals (i.e. "providers") based on various criteria. One type of search that we provide is to find providers that are highly rated by quality.
