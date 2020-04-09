@@ -21,8 +21,11 @@ def quality_business_logic(award):
     elif award.name == 'Blue Compare':
         process_blue_compare(award)
 
+    elif award.name == 'Blue Star':
+        process_blue_star(award)
+
     else:
-        pricess_normal_award(award)
+        process_normal(award)
  
 
 def process_blue_first(award):
@@ -51,12 +54,20 @@ def process_blue_compare(award):
         adjust_quality(award, INCREASE, 1);
 
 
-def pricess_normal_award(award):
+def process_normal(award):
 
     if award.expires_in <= 0:
         adjust_quality(award, DECREASE, 2);
     else:
         adjust_quality(award, DECREASE, 1);
+
+
+def process_blue_star(award):
+
+    if award.expires_in <= 0:
+        adjust_quality(award, DECREASE, 4);
+    else:
+        adjust_quality(award, DECREASE, 2);
 
 
 def adjust_quality(award, increase, amount):
