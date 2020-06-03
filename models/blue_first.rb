@@ -1,5 +1,4 @@
 require_relative 'standard_award'
-require "pry"
 
 class BlueFirst < StandardAward
   def update_quality

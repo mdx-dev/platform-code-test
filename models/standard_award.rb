@@ -1,5 +1,3 @@
-require "pry"
-
 class StandardAward
     attr_accessor :name, :expires_in, :quality
 

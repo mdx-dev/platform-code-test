@@ -3,7 +3,6 @@ require_relative "blue_distinction_plus"
 require_relative "blue_first"
 require_relative "blue_star"
 require_relative "standard_award"
-require "pry"
 
 class Award
   def initialize(name, expires_in, quality)
@@ -33,7 +32,6 @@ class Award
     when 'Blue Compare'
       BlueCompare.new(name, expires_in, quality)
     when 'Blue Star'
-      binding.pry
       BlueStar.new(name, expires_in, quality)
     else
       StandardAward.new(name, expires_in, quality)

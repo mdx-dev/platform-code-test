@@ -1,7 +1,7 @@
 require_relative 'standard_award'
 
 class BlueStar < StandardAward
-  
+
   def update_quality
     if @expires_in > 0
       decrement_quality
@@ -13,9 +13,5 @@ class BlueStar < StandardAward
     end
     decrement_expiry
   end
-
-  # lose quality twice as fast
-  def update_expiry
-    puts("UPDATE bluestar ex")
-  end
+  
 end
