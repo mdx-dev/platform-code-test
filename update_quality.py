@@ -29,4 +29,3 @@ def update_quality(awards):
             else:
                 if award.quality < 50:
                     award.quality += 1
-
