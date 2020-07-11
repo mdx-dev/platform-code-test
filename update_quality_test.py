@@ -1,8 +1,10 @@
 import pytest
 
-from award import Award
-from update_quality import update_quality
-
+from normal import Normal
+from blue_first import BlueFirst
+from blue_compare import BlueCompare
+from blue_star import BlueStar
+from blue_distinction_plus import BlueDistinctionPlus
 
 @pytest.mark.parametrize("initial_expires_in,initial_quality,expected_quality",
         [
@@ -12,9 +14,9 @@ from update_quality import update_quality
             (5,0,0),
             ])
 def test_normal_award(initial_expires_in, initial_quality, expected_quality):
-    award = Award(name = 'NORMAL ITEM', expires_in = initial_expires_in, quality
-            = initial_quality)
-    update_quality([award])
+  
+    award = Normal(expires_in = initial_expires_in, quality = initial_quality)
+    award.update_quality();
     assert award.expires_in == initial_expires_in - 1
     assert award.quality == expected_quality
 
@@ -30,9 +32,9 @@ def test_normal_award(initial_expires_in, initial_quality, expected_quality):
             (-10,50,50),
             ])
 def test_blue_first(initial_expires_in, initial_quality, expected_quality):
-    award = Award(name = 'Blue First', expires_in = initial_expires_in, quality
-            = initial_quality)
-    update_quality([award])
+    award = BlueFirst(expires_in = initial_expires_in, quality = initial_quality)
+    award.update_quality();
+   
     assert award.expires_in == initial_expires_in - 1
     assert award.quality == expected_quality
 
@@ -45,9 +47,9 @@ def test_blue_first(initial_expires_in, initial_quality, expected_quality):
             ])
 def test_blue_distinction(initial_expires_in, initial_quality,
         expected_quality):
-    award = Award(name = 'Blue Distinction Plus', expires_in =
-            initial_expires_in, quality = initial_quality)
-    update_quality([award])
+    award = BlueDistinctionPlus(expires_in = initial_expires_in, quality = initial_quality)
+    award.update_quality();
+    
     assert award.expires_in == initial_expires_in
     assert award.quality == expected_quality
 
@@ -67,9 +69,8 @@ def test_blue_distinction(initial_expires_in, initial_quality,
             (-10,10,0),
             ])
 def test_blue_compare(initial_expires_in, initial_quality, expected_quality):
-    award = Award(name = 'Blue Compare', expires_in = initial_expires_in,
-            quality = initial_quality)
-    update_quality([award])
+    award = BlueCompare(expires_in = initial_expires_in, quality = initial_quality)
+    award.update_quality();
     assert award.expires_in == initial_expires_in - 1
     assert award.quality == expected_quality
 
@@ -85,16 +86,16 @@ def test_blue_compare(initial_expires_in, initial_quality, expected_quality):
             ])
 
 def test_blue_star(initial_expires_in, initial_quality, expected_quality):
-    award = Award(name = 'Blue Star', expires_in = initial_expires_in,
-            quality = initial_quality)
-    update_quality([award])
+    award = BlueStar(expires_in = initial_expires_in, quality = initial_quality)
+    award.update_quality();
     assert award.expires_in == initial_expires_in - 1
     assert award.quality == expected_quality
 
 def test_several_awards():
-    award1 = Award(name = 'NORMAL ITEM', expires_in = 5, quality = 10)
-    award2 = Award(name = 'Blue First', expires_in = 3, quality = 10)
-    update_quality([award1, award2])
+    award1 = Normal(expires_in = 5, quality = 10)
+    award2 = BlueFirst(expires_in = 3, quality = 10)
+    award1.update_quality()
+    award2.update_quality()
 
     assert award1.quality == 9
     assert award1.expires_in == 4
