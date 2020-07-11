@@ -83,14 +83,13 @@ def test_blue_compare(initial_expires_in, initial_quality, expected_quality):
             (-10,10,6),
             (-10,0,0),
             ])
-@pytest.mark.xfail(reason = 'Pending')
+
 def test_blue_star(initial_expires_in, initial_quality, expected_quality):
     award = Award(name = 'Blue Star', expires_in = initial_expires_in,
             quality = initial_quality)
     update_quality([award])
     assert award.expires_in == initial_expires_in - 1
     assert award.quality == expected_quality
-
 
 def test_several_awards():
     award1 = Award(name = 'NORMAL ITEM', expires_in = 5, quality = 10)
