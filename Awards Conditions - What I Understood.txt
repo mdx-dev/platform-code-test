@@ -1,0 +1,10 @@
+
+Types of awards:            Blue Compare, Blue First, Blue Distinction Plus
+Quality with exp days < 10: +2 if < 50 ,  +2 if < 50, Constant 80
+Quality with exp days < 5:  +3 if < 50 ,  +3 if < 50, Constant 80
+Quality after expiration      0         , 0         , Constant 80
+
+As far as Blue Star award is concerned, I am planning to reduce it's quality every day.
+This will ensure lower quality on days further away from the granted date.
+Also, I will be expiring the Blue Star twice as fast so that it can be set to 0
+twice as fast as compared to Blue Compare and Blue First Awards.
