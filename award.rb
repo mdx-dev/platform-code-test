@@ -21,11 +21,12 @@ class Award
   def update_quality!
     step_expires_in_days
     step_quality
-    
   end
 
   private
 
+  #################################################################################
+  # Virtual functions to allow sublclasses to handle quality logic for themselves.
   def init_expires_in_days(value)
     @expires_in_days = value
   end
@@ -55,4 +56,6 @@ class Award
       @quality = 0
     end
   end
+  # end virtual functions
+  #################################################################################
 end
