@@ -32,7 +32,7 @@ class Award
   end
 
   def step_expires_in_days
-    @expires_in_days = @expires_in_days - 1
+    @expires_in_days -= 1
   end
 
   def init_quality(value)
@@ -50,7 +50,7 @@ class Award
 
     change_by = @expires_in_days < 0 ? 2 : 1
     
-    @quality = @quality - change_by
+    @quality -= change_by
 
     if @quality < 0
       @quality = 0

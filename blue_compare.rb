@@ -20,7 +20,7 @@ class BlueCompare < Award
       change_by = 1
     end
     
-    @quality = @quality + change_by
+    @quality += change_by
 
     if @quality > 50
       @quality = 50
