@@ -7,7 +7,7 @@ class BlueDistinctionPlus < Award
 
   private
 
-  def init_quality(value = 1)
+  def init_quality(value)
     @quality = 80
   end
 
