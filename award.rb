@@ -1,6 +1,11 @@
 # Award = Struct.new(:name, :expires_in, :quality)
 
 class Award
+  QUALITY_VALUES = {
+    min: 0,
+    max: 50
+  }
+
   attr_accessor :name, :expires_in
 
 
@@ -16,10 +21,6 @@ class Award
 
   def quality=(new_quality)
     @quality = new_quality
-    @quality = @quality.clamp(0,50)
+    @quality = @quality.clamp(QUALITY_VALUES[:min], QUALITY_VALUES[:max])
   end
-
-  # def quality=(new_quality)
-  #   @quality = new_quality
-  # end
 end
