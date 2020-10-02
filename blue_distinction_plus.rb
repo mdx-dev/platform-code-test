@@ -8,4 +8,7 @@ class BlueDistinctionPlus < Award
   def quality=(new_quality)
   end
 
+  def update_quality
+    update_expires_in
+  end
 end

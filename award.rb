@@ -13,6 +13,7 @@ class Award
     @name = name
     @expires_in = expires_in
     @quality = quality
+    @quality_type = :decrement
   end
 
   def quality=(new_quality)
@@ -22,9 +23,7 @@ class Award
 
   def update_quality
     if expires_in > 0
-      if quality > 0
-        self.quality -= 1
-      end
+      self.quality -= 1
     else
       self.quality -= 2
     end
@@ -32,8 +31,10 @@ class Award
     update_expires_in
   end
 
-  def update_expires_in
-    self.expires_in -= 1
-  end
+  private
+
+    def update_expires_in
+      self.expires_in -= 1
+    end
 
 end
