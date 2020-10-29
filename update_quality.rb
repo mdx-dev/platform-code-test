@@ -1,5 +1,12 @@
 require_relative 'award'
 
+# added new method to prevent repeat code
+def depreciate_quality(award)
+  if award.name == 'Blue Star'
+    award.quality -= 1
+    end
+end
+
 def update_quality(awards)
   awards.each do |award|
     if award.name != 'Blue First' && award.name != 'Blue Compare'
@@ -10,9 +17,7 @@ def update_quality(awards)
 
       #  Before the expiration date depreciate Blue Star award quality by 1
       #  Blue Star award depreciates in quality value twice as fast as normal awards before expiration date
-        if award.name == 'Blue Star'
-          award.quality -= 1
-        end
+        depreciate_quality(award)
       end
     else
       if award.quality < 50
@@ -50,9 +55,7 @@ def update_quality(awards)
             end
 
             #  Blue Star award depreciates in quality value twice as fast as normal awards after expiration date
-            if award.name == 'Blue Star'
-              award.quality -= 1
-            end
+            depreciate_quality(award)
           end
         else
           award.quality = award.quality - award.quality
