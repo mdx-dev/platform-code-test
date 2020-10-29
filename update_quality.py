@@ -17,10 +17,10 @@ def update_quality(awards):
             if award.quality < 50:
                 award.quality += 1
                 if award.name == "Blue Compare":
-                    if award.expires_in < 11:
+                    if award.expires_in <= 10:
                         if award.quality < 50:
                             award.quality += 1
-                    if award.expires_in < 6:
+                    if award.expires_in <= 5:
                         if award.quality < 50:
                             award.quality += 1
 
