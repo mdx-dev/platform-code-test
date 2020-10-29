@@ -9,6 +9,7 @@ def update_quality(awards)
         end
 
       #  Before the expiration date depreciate Blue Star award quality by 1
+      #  Blue Star award depreciates in quality value twice as fast as normal awards before expiration date
         if award.name == 'Blue Star'
           award.quality -= 1
         end
@@ -48,6 +49,10 @@ def update_quality(awards)
               award.quality -= 1
             end
 
+            #  Blue Star award depreciates in quality value twice as fast as normal awards after expiration date
+            if award.name == 'Blue Star'
+              award.quality -= 1
+            end
           end
         else
           award.quality = award.quality - award.quality
