@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df4171f0-fe28-418a-bf8e-3394a7960d9a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/update_quality.rb" beforeDir="false" afterPath="$PROJECT_DIR$/update_quality.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/update_quality_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/update_quality_spec.rb" afterDir="false" />
     </list>
@@ -66,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1603927790986</updated>
       <workItem from="1603927792672" duration="487000" />
-      <workItem from="1603928349357" duration="6951000" />
+      <workItem from="1603928349357" duration="7650000" />
     </task>
     <servers />
   </component>
