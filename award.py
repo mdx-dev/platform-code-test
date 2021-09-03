@@ -77,3 +77,10 @@ class Award(object):
         self.name = name
         self.expires_in = expires_in
         self.quality = quality
+    
+    def update(self):
+        """
+        Update current quality based on the criteria
+        :return: None
+        """
+        self.expires_in, self.quality = self.updater.update(self.expires_in, self.quality)
