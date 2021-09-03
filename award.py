@@ -62,6 +62,14 @@ class QUpdaterBlueStar(QUpdaterBase):
         q = (q - 2) if (exp < 0 and q > 0) else q
         return exp, q
 
+# A dictionary linking names with specific classes of quality updaters
+updaters = {
+    'NORMAL ITEM': QUpdaterBase(),
+    'Blue First': QUpdaterBlueFirst(),
+    'Blue Compare': QUpdaterBlueCompare(),
+    'Blue Distinction Plus': QUpdaterBlueDistinctionPlus(),
+    'Blue Star': QUpdaterBlueStar(),
+}
 
 
 class Award(object):
