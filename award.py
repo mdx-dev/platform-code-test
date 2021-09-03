@@ -1,4 +1,6 @@
 class QUpdaterBase(object):
+    # Normal Item is what was referenced in the test file, so I decided to stick with the naming convention instead
+    # of modifying the test file.
     """
     Normal Item
     """
