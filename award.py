@@ -79,6 +79,7 @@ class Award(object):
         self.name = name
         self.expires_in = expires_in
         self.quality = quality
+        self.updater = updaters[name] 
     
     def update(self):
         """
