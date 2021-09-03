@@ -24,7 +24,7 @@ class QUpdaterBlueFirst(QUpdaterBase):
         return exp, q
 
 class QUpdaterBlueCompare(QUpdaterBlueFirst):
-    # Inherits QUpdatedBlueFirst Class
+    # Inherits QUpdaterBlueFirst Class
     """
     Blue Compare Item
     """
@@ -39,6 +39,16 @@ class QUpdaterBlueCompare(QUpdaterBlueFirst):
         # 0 if expiration date has passed
         q = 0 if exp < 0 else q
         return exp, q
+
+class QUpdaterBlueDistinctionPlus(QUpdaterBase):
+    # Inherits QUpdaterBase class
+    """
+    Blue Distinction Plus
+    """
+    def update(self, exp, q):
+        # Doesn't update anything!
+        return exp, q
+
 
 
 class Award(object):
