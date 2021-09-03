@@ -46,7 +46,20 @@ class QUpdaterBlueDistinctionPlus(QUpdaterBase):
     Blue Distinction Plus
     """
     def update(self, exp, q):
-        # Doesn't update anything!
+        # Doesn't update anything! 
+        return exp, q
+
+class QUpdaterBlueStar(QUpdaterBase):
+    # Inherits QUpdaterBase class
+    """
+    Blue Star Item
+    """
+    def update(self, exp, q):
+        exp -= 1
+        # First decrease(2x) if quality is positive
+        q = (q - 2) if q > 0 else q
+        # Second decrease(2x) if expiration is passed
+        q = (q - 2) if (exp < 0 and q > 0) else q
         return exp, q
 
 
