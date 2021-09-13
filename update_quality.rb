@@ -1,7 +1,9 @@
 require 'award'
 
 def blue_first(award)
-  award.expires_in -= 1
+  if award.name != 'Blue First'
+    return 
+  end
   if award.quality < 50
     award.quality += 1
   end
@@ -11,9 +13,8 @@ def blue_first(award)
 end
 
 def blue_compare(award)
-  award.expires_in -= 1
-  if award.quality == 50
-    return award.quality = 50
+  if award.name != 'Blue Compare' or award.quality == 50
+    return 
   end
 
   if award.expires_in > 9
@@ -30,25 +31,32 @@ def blue_compare(award)
 end
 
 def blue_distinction_plus(award)
-  return
+  if award.name != 'Blue Distinction Plus'
+    return 
+  end
+  award.expires_in += 1
 end
 
 def blue_star(award)
-  award.expires_in -= 1
-  if award.quality > 0
-    award.quality -= 2
+  if award.name != 'Blue Star' or award.quality == 0
+    return 
   end
+  
+  if award.expires_in > 0
+    award.quality -= 2
+  elsif award.expires_in <= 0
+    award.quality -= 4
+  end    
+
 end
 
 def normal_item(award)
-  award.expires_in -= 1
-  if award.quality == 0
-    return
+  if award.name != 'NORMAL ITEM' or award.quality == 0
+    return 
   end
+  
   if award.expires_in > 0
     award.quality -= 1
-  elsif award.expires_in == 0
-    award.quality -= 2
   else
     award.quality -= 2
   end
@@ -56,18 +64,13 @@ end
 
 def update_quality(awards)
   awards.each do |award|
-    if award.name == 'Blue First'
+    award.expires_in -= 1
       blue_first(award)
-    elsif award.name == 'Blue Compare'
       blue_compare(award)
-    elsif award.name == 'Blue Star'
       blue_star(award)
-    elsif award.name == 'Blue Distinction Plus'
       blue_distinction_plus(award)
-    else
       normal_item(award)
-    end
-    if award.quality < 0
+    if award.quality <= 0
       award.quality = 0
     end
   end
