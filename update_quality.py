@@ -1,8 +1,6 @@
-import math
-
 # Changes:
 # Broke the logic out in to three section - the initial quality pass, updating the expirations, and then quality for expired items.
-# Using the math library to reduce the indentation with all the 'if' blocks, and allow for better management of changes beyond +/- 1
+# Using min and max to reduce the indentation with all the 'if' blocks, and allow for better management of changes beyond +/- 1
 # Flipped all the != conditions around to == conditions so they are easier for me to read
 
 # Manage the first pass of quality changes
@@ -42,8 +40,7 @@ def update_expiration(award):
         award.expires_in -= 1
 
 
-# def update_expired_awards(award):
-
+# Handle the quality changes for just expired awards
 def update_expired_awards(award):
     # Blue Distinction Plus does not reduce in quality
     if award.name == 'Blue Distinction Plus':
