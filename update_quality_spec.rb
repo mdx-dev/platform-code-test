@@ -117,7 +117,7 @@ describe '#update_quality' do
         end
 
         context 'long before expiration date' do
-          let(:initial_expires_in) { 11 }
+          let(:initial_expires_in) { 12 }
           specify { expect(award.quality).to eq(initial_quality+1) }
 
           context 'at max quality' do
@@ -136,7 +136,7 @@ describe '#update_quality' do
         end
 
         context 'medium close to expiration date (lower bound)' do
-          let(:initial_expires_in) { 6 }
+          let(:initial_expires_in) { 7 }
           specify { expect(award.quality).to eq(initial_quality+2) }
 
           context 'at max quality' do
@@ -177,7 +177,7 @@ describe '#update_quality' do
       end
 
       context 'given a Blue Star award' do
-        before { pending }
+        # before { pending }
         let(:name) { 'Blue Star' }
         before { award.expires_in.should == initial_expires_in-1 }
 
