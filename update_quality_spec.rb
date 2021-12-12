@@ -1,5 +1,6 @@
 require 'rspec'
 require 'update_quality'
+require "Award"
 
 describe '#update_quality' do
 
@@ -110,11 +111,10 @@ describe '#update_quality' do
 
       context 'given Blue Compare' do
         let(:name) { 'Blue Compare' }
-
         before do
           # Verify that this is always true in the current context
           award.expires_in.should == initial_expires_in-1
-        end
+        end 
 
         context 'long before expiration date' do
           let(:initial_expires_in) { 11 }
@@ -177,7 +177,7 @@ describe '#update_quality' do
       end
 
       context 'given a Blue Star award' do
-        before { pending }
+       # before { pending }
         let(:name) { 'Blue Star' }
         before { award.expires_in.should == initial_expires_in-1 }
 
