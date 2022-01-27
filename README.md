@@ -91,5 +91,5 @@ To test your work, run pytest:
 
 ## Finishing Up
 
-- Please fork the repo and push your completed code to a public github repository.
+- Please fork the repo, push your completed code to a public github repository and open a Pull Request against this repository.
 
