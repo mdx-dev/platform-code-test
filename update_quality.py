@@ -8,7 +8,7 @@ def update_quality(awards):
             if award.quality < 50:
                 award.quality += 1
                 if award.name == 'Blue Compare':
-                    print("Hello Aditya here!")
+                    print("Hello Aditya is my name !")
                     if award.expires_in < 11:
                         if award.quality < 50:
                             award.quality += 1
