@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
-# Award = Struct.new(:name, :expires_in, :quality)
-
 class Award
   BLUE_FIRST = 'Blue First'
   BLUE_COMPARE = 'Blue Compare'
   BLUE_DISTINCT_PLUS = 'Blue Distinction Plus'
+  NORMAL_ITEM = 'NORMAL ITEM'
+  BLUE_STAR = 'Blue Star'
+  MAX_AWARD_VALUE = 50
+  TEN_DAYS = 10
+  FIVE_DAYS = 5
 
   attr_reader :name
   attr_accessor :expires_in, :quality
@@ -17,26 +20,61 @@ class Award
   end
 
   def update_quality
-    if @name != BLUE_FIRST && name != BLUE_COMPARE
-      @quality -= 1 if @quality.positive? && (@name != BLUE_DISTINCT_PLUS)
-    elsif @quality < 50
-      @quality += 1
-      if @name == BLUE_COMPARE
-        @quality += 1 if @expires_in < (11) && (@quality < 50)
-        @quality += 1 if @expires_in < (6) && (@quality < 50)
-      end
+    decrement_expiration if @name != BLUE_DISTINCT_PLUS
+
+    case @name
+    when NORMAL_ITEM
+      update_normal
+    when BLUE_FIRST
+      update_blue_first
+    when BLUE_COMPARE
+      update_blue_compare
+    when BLUE_STAR
+      update_blue_star
     end
-    @expires_in -= 1 if @name != BLUE_DISTINCT_PLUS
-    if @expires_in.negative?
-      if @name != BLUE_FIRST
-        if @name != BLUE_COMPARE
-          @quality -= 1 if @quality.positive? && (@name != BLUE_DISTINCT_PLUS)
-        else
-          @quality -= @quality
-        end
-      elsif @quality < 50
-        @quality += 1
-      end
+  end
+
+  private
+
+  def update_blue_star
+    @quality = [@quality - 2, 0].max
+    @quality = [@quality - 2, 0].max if negative_expires_in?
+  end
+
+  def update_blue_compare
+    if @quality < MAX_AWARD_VALUE
+      increment_quality
+      increment_quality if @expires_in <= TEN_DAYS
+      increment_quality if @expires_in <= FIVE_DAYS
     end
+    reset_quality if negative_expires_in?
+  end
+
+  def update_blue_first
+    return unless @quality < MAX_AWARD_VALUE
+
+    increment_quality
+    @quality = [@quality + 1, MAX_AWARD_VALUE].min if negative_expires_in?
+  end
+
+  def update_normal
+    @quality = [@quality - 1, 0].max
+    @quality = [@quality - 1, 0].max if negative_expires_in?
+  end
+
+  def reset_quality
+    @quality = 0
+  end
+
+  def decrement_expiration
+    @expires_in -= 1
+  end
+
+  def increment_quality
+    @quality += 1
+  end
+
+  def negative_expires_in?
+    @expires_in.negative?
   end
 end
