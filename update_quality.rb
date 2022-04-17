@@ -1,4 +1,4 @@
-require 'award'
+require_relative 'award.rb'
 
 def update_quality(awards)
   awards.each do |award|
@@ -43,6 +43,11 @@ def update_quality(awards)
         if award.quality < 50
           award.quality += 1
         end
+      end
+    end
+    if award.name == 'Blue Star'
+      if award.expires_in > 0
+        award.quality -= 2
       end
     end
   end
