@@ -46,8 +46,12 @@ def update_quality(awards)
       end
     end
     if award.name == 'Blue Star'
-      if award.expires_in > 0
-        award.quality -= 2
+      if award.expires_in >= 0
+        award.quality * -2
+      end
+    else
+      if award.expires_in < 0
+        award.quality * -4
       end
     end
   end
