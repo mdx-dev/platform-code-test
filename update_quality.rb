@@ -55,11 +55,9 @@ def update_quality(awards)
       else
         if award.expires_in >= 0
           award.quality -= 2
-          # award.quality -= 2
         else
           if award.expires_in < 0
           award.quality -= 4
-          # award.quality -= 4
           end
         end
       end
