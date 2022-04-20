@@ -25,9 +25,12 @@ def update_quality(awards)
         end
       end
     end
+
+    # Logic to decrement the award.expires_in field
     if award.name != 'Blue Distinction Plus'
       award.expires_in -= 1
     end
+
     if award.expires_in < 0
       if award.name != 'Blue First'
         if award.name != 'Blue Compare'
