@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'forwardable'
-require 'dry/inflector'
 
 class Award
   extend Forwardable
@@ -10,17 +9,7 @@ class Award
 
   QUALITY_UPPER_LIMIT = 50
 
-  BLUE_FIRST = 'Blue First'
-  BLUE_COMPARE = 'Blue Compare'
-  BLUE_DISTINCTION_PLUS = 'Blue Distinction Plus'
-  BLUE_STAR = 'Blue Star'
-  NORMAL_ITEM = 'NORMAL ITEM'
-  AWARDS = [BLUE_FIRST, BLUE_COMPARE, BLUE_DISTINCTION_PLUS, BLUE_STAR, NORMAL_ITEM].freeze
-  INFLECTOR = Dry::Inflector.new.freeze
-  private_constant(
-    :QUALITY_UPPER_LIMIT,
-    :BLUE_FIRST, :BLUE_COMPARE, :BLUE_DISTINCTION_PLUS, :BLUE_STAR, :AWARDS, :INFLECTOR
-  )
+  private_constant :QUALITY_UPPER_LIMIT
 
   def initialize(name, initial_expires_in, initial_quality)
     @name = name
@@ -45,25 +34,13 @@ class Award
     else
       return
     end
-
-    # @name = name
-    # @expires_in = initial_expires_in
-    # @quality = initial_quality
-  end
-
-  AWARDS.each do |award|
-    method_name = [INFLECTOR.underscore(award).gsub(/\s+/, '_'), '?'].join
-
-    define_method method_name do
-      name == award
-    end
   end
 
   class BlueStar
     attr_reader :expires_in, :quality
 
     def self.match?(name)
-      name == BLUE_STAR
+      name == 'Blue Star'
     end
 
     def initialize(initial_expires_in, initial_quality)
@@ -83,7 +60,7 @@ class Award
     attr_reader :expires_in, :quality
 
     def self.match?(name)
-      name == BLUE_FIRST
+      name == 'Blue First'
     end
 
     def initialize(initial_expires_in, initial_quality)
@@ -104,7 +81,7 @@ class Award
     attr_reader :expires_in, :quality
 
     def self.match?(name)
-      name == BLUE_DISTINCTION_PLUS
+      name == 'Blue Distinction Plus'
     end
 
     def initialize(initial_expires_in, _initial_quality)
@@ -119,7 +96,7 @@ class Award
     attr_reader :expires_in, :quality
 
     def self.match?(name)
-      name == BLUE_COMPARE
+      name == 'Blue Compare'
     end
 
     def initialize(initial_expires_in, initial_quality)
@@ -152,7 +129,7 @@ class Award
     attr_reader :expires_in, :quality
 
     def self.match?(name)
-      name == NORMAL_ITEM
+      name == 'NORMAL ITEM'
     end
 
     def initialize(initial_expires_in, initial_quality)
