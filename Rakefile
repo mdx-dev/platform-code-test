@@ -1,5 +1,5 @@
 task :default => :spec
 
 task :spec do
-  sh "rspec ."
+  sh "rspec ./spec/"
 end

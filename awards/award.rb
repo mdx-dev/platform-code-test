@@ -8,15 +8,16 @@ class Award
   end
 
   # This is the base behavior of what an award should do as quality
-  # is updated. This method will be overridden in individual
-  # awards classes. Quality can never go below 0.
+  # is updated. Quality can never go below 0.
   def update_quality
     @quality += determine_quality_improvement
     @quality = [@quality, 50].min
+    @quality = 0 if @quality.negative?
     @expires_in -= 1
     self
   end
 
+  # This method will be overridden in individual awards classes.
   def determine_quality_improvement
     return 0 if @quality.zero?
 

@@ -93,3 +93,9 @@ To test your work, run pytest:
 
 - Please fork the repo, push your completed code to a public github repository and open a Pull Request against this repository.
 
+## Changes
+
+* Rather than using a Struct for an `Award` and then having an update_quality method hold the behavior, I have opted to use a class structure where all the "Blue" type awards inherit from `Award`. `Award` contains two methods, `#update_quality` and `#determine_quality_improvement`. It is expected that classes which inherit from `Award` override `#determine_quality_improvement` at a minimum to specify how their quality should be changed.
+* Spec has been torn down from one monolith into individual unit specs for each award type. This eliminates the need to test how multiple awards are handled in a collection as each individual award's behavior is tested according to the original specification.
+* Rakefile has been updated so that you are able to just pull this repo and execute `rake` to run the test suite.
+
