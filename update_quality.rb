@@ -5,7 +5,7 @@ require 'award'
 def update_quality(awards)
   awards.each do |award|
     if !award.blue_first? && !award.blue_compare?
-      if award.quality > 0
+      if award.quality.positive?
         if !award.blue_distinction_plus?
           award.quality -= 1
           if award.blue_star?
@@ -31,14 +31,12 @@ def update_quality(awards)
       end
     end
 
-    if !award.blue_distinction_plus?
-      award.expires_in -= 1
-    end
+    award.expires_in -= 1 if !award.blue_distinction_plus?
 
-    if award.expires_in < 0
+    if award.expires_in.negative?
       if !award.blue_first?
         if !award.blue_compare?
-          if award.quality > 0
+          if award.quality.positive?
             if !award.blue_distinction_plus?
               award.quality -= 1
               if award.blue_star?
