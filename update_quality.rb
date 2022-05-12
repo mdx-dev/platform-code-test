@@ -45,7 +45,7 @@ def update_quality(awards)
             end
           end
         else
-          award.quality = award.quality - award.quality
+          award.quality = 0
         end
       else
         if award.quality < 50
