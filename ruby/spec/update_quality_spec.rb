@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'rspec'
-require 'update_quality'
+
+require_relative '../update_quality'
 
 describe '#update_quality' do
   context 'Given a single award' do
