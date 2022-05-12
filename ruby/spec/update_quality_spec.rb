@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
+
 require 'rspec'
 
 require_relative '../update_quality'
@@ -236,3 +238,4 @@ describe '#update_quality' do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
