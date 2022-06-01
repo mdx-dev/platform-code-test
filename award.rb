@@ -1,3 +1,5 @@
+require 'pry'
+
 class Award
   attr_accessor :name, :expires_in, :quality
 
@@ -17,6 +19,9 @@ class Award
       update_blue_first
     when 'Blue Distinction Plus'
       update_distinction_plus
+    when 'Blue Star'
+      update_blue_star
+    end
   end
 
   def quality_greater_than_zero?
@@ -28,7 +33,11 @@ class Award
   end
 
   def max_quality?
-    @quality >= 50 ? @quality = 50 : @quality
+    if @quality >= 50
+      @quality = 50
+      return true
+    end
+    false
   end
 
   def update_normal
@@ -50,62 +59,24 @@ class Award
     max_quality?
     @expires_in -= 1
   end
-
+  
   def update_blue_first
-    @quality += 1 if !max_quality?
+    if  !expired?
+      @quality += 1
+    else
+      @quality += 2
+    end
+    max_quality?
     @expires_in -= 1
   end
 
+  # distinction plus doesn't change quality
   def update_distinction_plus
-    @expires_in -= 1
+    self
   end
 
-# def update_quality(awards)
-#   awards.each do |award|
-#     if award.name != 'Blue First' && award.name != 'Blue Compare'
-#       if award.quality > 0
-#         if award.name != 'Blue Distinction Plus'
-#           award.quality -= 1
-#         end
-#       end
-#     else
-#       if award.quality < 50
-#         award.quality += 1
-#         if award.name == 'Blue Compare'
-#           if award.expires_in < 11
-#             if award.quality < 50
-#               award.quality += 1
-#             end
-#           end
-#           if award.expires_in < 6
-#             if award.quality < 50
-#               award.quality += 1
-#             end
-#           end
-#         end
-#       end
-#     end
-#     if award.name != 'Blue Distinction Plus'
-#       award.expires_in -= 1
-#     end
-#     if award.expires_in < 0
-#       if award.name != 'Blue First'
-#         if award.name != 'Blue Compare'
-#           if award.quality > 0
-#             if award.name != 'Blue Distinction Plus'
-#               award.quality -= 1
-#             end
-#           end
-#         else
-#           award.quality = award.quality - award.quality
-#         end
-#       else
-#         if award.quality < 50
-#           award.quality += 1
-#         end
-#       end
-#     end
-#   end
-# end
+  def update_blue_star
+    self
+  end
 
 end
