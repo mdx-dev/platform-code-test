@@ -9,6 +9,7 @@ class Award
     @quality = initial_quality
   end
 
+  # update award based on award name
   def handle_award_update
     case @name
     when 'NORMAL ITEM'
@@ -24,6 +25,7 @@ class Award
     end
   end
 
+  # quality cannot be less than 0
   def quality_greater_than_zero?
     @quality > 0
   end
@@ -32,6 +34,7 @@ class Award
     @expires_in <= 0
   end
 
+  # @quality cannot exceed 50
   def max_quality?
     if @quality >= 50
       @quality = 50
@@ -40,12 +43,14 @@ class Award
     false
   end
 
+  # generic award update
   def update_normal
     @quality -= 1 if quality_greater_than_zero?
     @expires_in -= 1
     @quality -= 1 if expired? && quality_greater_than_zero?
   end
 
+  # @quality increase varies by number of days left before expiration and resets to 0 if expired
   def update_blue_compare
     if expired? 
       @quality = 0
@@ -60,6 +65,7 @@ class Award
     @expires_in -= 1
   end
   
+  #increase by one if not expired, otherwise @quality increases by 2
   def update_blue_first
     if  !expired?
       @quality += 1
@@ -70,13 +76,16 @@ class Award
     @expires_in -= 1
   end
 
-  # distinction plus doesn't change quality
+  # distinction plus doesn't change quality so just return award
   def update_distinction_plus
     self
   end
 
+  # @quality of Blue star degrades twice as fast as normal awards
   def update_blue_star
-    self
+    @quality -= 2 if quality_greater_than_zero?
+    @quality -= 2 if expired? && quality_greater_than_zero?
+    @expires_in -= 1
   end
 
 end
