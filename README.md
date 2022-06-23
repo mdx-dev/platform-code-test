@@ -16,7 +16,7 @@ Pretty basic. But here is where it gets interesting...
   - Once the expiration date has passed, quality score degrades twice as fast
 
   - The quality of an award is never negative.
-  
+
   - "Blue First" awards actually increase in quality the older they get
 
   - The quality of an award is never more than 50
@@ -46,7 +46,7 @@ The existing code is "legacy", and, ugh, it's ugly. We're attempting to move the
 
 The easiest way is to use bundler to install the dependencies. To do so, you need to install the bundler gem if you haven't already done so
 
-    gem install bundler
+    gem install bundler --version 2.3.16
 
 run bundler
 
