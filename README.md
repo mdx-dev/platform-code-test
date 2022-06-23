@@ -93,3 +93,14 @@ To test your work, run pytest:
 
 - Please fork the repo, push your completed code to a public github repository and open a Pull Request against this repository.
 
+## Feedback
+WARNING: ruby-2.1.1 is past its end of life and is now unsupported.
+It no longer receives bug fixes or critical security updates.
+
+https://github.com/rbenv/ruby-build/issues/1700, especially https://github.com/rbenv/ruby-build/issues/1700#issuecomment-811430563 - exact same for me
+
+I have an M1 running Monterey, version 12.4.
+
+I have futzed with Rosetta before and it was a nightmare so stopping the challenge without starting.
+
+Realistically, it is just as well, but it would have been nice to run rake and work on coding to the tests you provided.  Good luck with other candidates.  
