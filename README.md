@@ -33,7 +33,7 @@ We have recently gotten a request from our clients to include an additional awar
 
 Here is the business story:
 
-- In order to distinguish between providers of high quality, as a consumer, I want to see "Blue Star" awarded providers near the top of the results when the award is initially granted, but it's impact should be smaller the longer it has been from the grant date.
+- In order to distinguish between providers of high quality, as a consumer, I want to see "Blue Star" awarded providers near the top of the results when the award is  initially granted, but it's impact should be smaller the longer it has been from the grant date.
 
 - Acceptance Criteria
   - "Blue Star" awards should lose quality value twice as fast as normal awards.
