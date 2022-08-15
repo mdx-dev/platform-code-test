@@ -3,11 +3,8 @@ require 'award'
 def update_quality(awards)
 
   expired = Proc.new { |date| date <= 0}
-  max = Proc.new { |quality| quality == 50}
-  min = Proc.new { |quality| quality == 0}
 
   reductor = lambda { |name, expired|
-    puts name, expired
 
     reductor = case name
     when 'Blue Distinction Plus' then return reductor = 0
@@ -21,58 +18,47 @@ def update_quality(awards)
     reductor
   }
 
+  blue_compare = lambda { |expires, reductor, quality|
+    puts "-+-+ Inside Compare Proc: Expires in: #{expires} and current reductor: #{reductor} and QUALITY: #{quality}"
+
+
+  case expires
+  when expires > 10 then reductor
+  when 6..10 then reductor += 1
+  when 1..5 then reductor += 2
+  when -1000..0 then reductor = -quality
+  end
+  reductor
+  }
+
 
   awards.each do |award|
 
-
     reducer = reductor.call(award.name, expired.call(award.expires_in))
-    puts reducer
+
+    puts "------The name is: #{name} initial quality is: #{award.quality} the reducer: #{reducer} expires in: #{award.expires_in}"
 
 
 
 
-    if award.name != 'Blue First' && award.name != 'Blue Compare'
-      if award.quality > 0
-        if award.name != 'Blue Distinction Plus'
-          award.quality -= 1
-        end
-      end
+    if name == 'Blue Compare'
+      puts " +++++++++++++++++++ IT IS COMPARE ++++++++++++++++++++++++="
+      puts "reducer before COMPARE: #{reducer}"
+      reducer = blue_compare.call(award.expires_in, reducer, award.quality)
+      puts "- reducer after COMPARE: #{reducer}"
     else
-      if award.quality < 50
-        award.quality += 1
-        if award.name == 'Blue Compare'
-          if award.expires_in < 11
-            if award.quality < 50
-              award.quality += 1
-            end
-          end
-          if award.expires_in < 6
-            if award.quality < 50
-              award.quality += 1
-            end
-          end
-        end
-      end
+      puts "IT IS NOT COMPARE - - - -"
+      reducer = reducer
     end
-    if award.name != 'Blue Distinction Plus'
-      award.expires_in -= 1
-    end
-    if award.expires_in < 0
-      if award.name != 'Blue First'
-        if award.name != 'Blue Compare'
-          if award.quality > 0
-            if award.name != 'Blue Distinction Plus'
-              award.quality -= 1
-            end
-          end
-        else
-          award.quality = award.quality - award.quality
-        end
-      else
-        if award.quality < 50
-          award.quality += 1
-        end
-      end
-    end
+
+    award.quality += reducer if award.quality > 0 and award.quality < 50 # Quality reduce
+
+
+
+
+    award.expires_in -= 1 unless name == 'Blue Distinction Plus'
+
+    puts "- Aftermath Quality: #{award.quality} and expires in: #{award.expires_in}" # Expires_in reduce
+
   end
 end
