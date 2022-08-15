@@ -19,8 +19,6 @@ def update_quality(awards)
   }
 
   blue_compare = lambda { |expires, reductor, quality|
-    puts "-+-+ Inside Compare Proc: Expires in: #{expires} and current reductor: #{reductor} and QUALITY: #{quality}"
-
 
   case expires
   when expires > 10 then reductor
@@ -28,6 +26,7 @@ def update_quality(awards)
   when 1..5 then reductor += 2
   when -1000..0 then reductor = -quality
   end
+
   reductor
   }
 
@@ -38,17 +37,9 @@ def update_quality(awards)
 
     puts "------The name is: #{name} initial quality is: #{award.quality} the reducer: #{reducer} expires in: #{award.expires_in}"
 
-
-
-
-    if name == 'Blue Compare'
-      puts " +++++++++++++++++++ IT IS COMPARE ++++++++++++++++++++++++="
-      puts "reducer before COMPARE: #{reducer}"
-      reducer = blue_compare.call(award.expires_in, reducer, award.quality)
-      puts "- reducer after COMPARE: #{reducer}"
-    else
-      puts "IT IS NOT COMPARE - - - -"
-      reducer = reducer
+    reducer = case name
+    when 'Blue Compare' then blue_compare.call(award.expires_in, reducer, award.quality)
+    else reducer
     end
 
     award.quality += reducer if award.quality > 0 and award.quality < 50 # Quality reduce
