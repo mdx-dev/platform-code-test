@@ -29,7 +29,6 @@ class Award
     # Does not change expiration date if it is Blue Disctintion Plus
     @expires_in -= 1 unless name == 'Blue Distinction Plus'
 
-    # This is the end; my only friend.
   end
 
   private
@@ -54,4 +53,6 @@ class Award
     when -Float::INFINITY..0 then -quality
     end
   end
+
+    # This is the end; my only friend.
 end
