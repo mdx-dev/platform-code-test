@@ -37,7 +37,7 @@ class Award
   def reductor_calculator (name, expired)
     reductor = case name
     when 'Blue Distinction Plus' then return reductor = 0
-    when 'Blue First','Blue Compare' then 1
+    when 'Blue First' then 1
     when 'Blue Star' then -2
     when 'NORMAL ITEM' then -1
     end
