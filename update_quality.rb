@@ -2,7 +2,12 @@ require 'award'
 
 def update_quality(awards)
   awards.each do |award|
-    if award.name != 'Blue First' && award.name != 'Blue Compare'
+    if award.name == 'Blue Star'
+      if award.quality > 0 
+        quality_degrade = award.expires_in > 0 ? 2 : 4
+        award.quality -= quality_degrade
+      end
+    elsif award.name != 'Blue First' && award.name != 'Blue Compare'
       if award.quality > 0
         if award.name != 'Blue Distinction Plus'
           award.quality -= 1
@@ -32,7 +37,7 @@ def update_quality(awards)
       if award.name != 'Blue First'
         if award.name != 'Blue Compare'
           if award.quality > 0
-            if award.name != 'Blue Distinction Plus'
+            if !['Blue Distinction Plus', 'Blue Star'].include? award.name
               award.quality -= 1
             end
           end
