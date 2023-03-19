@@ -1,6 +1,4 @@
-require './award_quality_update_strategy'
-
-class BlueCompareStrategy < AwardQualityUpdateStrategy
+class BlueCompareStrategy
     def update(award)
 
         if award.quality < 50

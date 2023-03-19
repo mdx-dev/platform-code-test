@@ -1,11 +1,8 @@
 require 'award'
 require 'award_names'
+Dir["./award_quality_update_strategies/*.rb"].each {|file| require file }
 
-class AwardQualityUpdateStrategy 
-    def update(award)
-        raise NotImplementedError
-    end
-
+class AwardQualityUpdateManager 
     def self.get_strategy(award)
         case award.name
         when AwardNames::BLUE_COMPARE
@@ -21,7 +18,11 @@ class AwardQualityUpdateStrategy
             return BlueStarStrategy.new
         
         else
-            return OrdinaryStrategy.new
+            return NormalStrategy.new
         end
+    end
+
+    def self.update(award)
+        get_strategy(award).update(award)
     end
 end

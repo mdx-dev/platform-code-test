@@ -1,6 +1,4 @@
-require './award_quality_update_strategy'
-
-class BlueDistinctionStrategy < AwardQualityUpdateStrategy
+class BlueDistinctionStrategy
     def update(award)
         # Never decreases in quality
     end

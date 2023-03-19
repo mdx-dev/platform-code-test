@@ -1,6 +1,4 @@
-require './award_quality_update_strategy'
-
-class BlueStarStrategy < AwardQualityUpdateStrategy
+class BlueStarStrategy
     def update(award)
         if award.quality > 0 && award.expires_in > 0
            award.quality = [award.quality - 2, 0].max

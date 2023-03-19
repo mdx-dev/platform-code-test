@@ -1,6 +1,4 @@
-require './award_quality_update_strategy'
-
-class OrdinaryStrategy < AwardQualityUpdateStrategy
+class NormalStrategy
     def update(award)
         if award.quality > 0
             award.quality -= 1
