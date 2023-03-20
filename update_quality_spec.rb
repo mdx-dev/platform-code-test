@@ -177,7 +177,6 @@ describe '#update_quality' do
       end
 
       context 'given a Blue Star award' do
-        before { pending }
         let(:name) { 'Blue Star' }
         before { award.expires_in.should == initial_expires_in-1 }
 
@@ -219,6 +218,13 @@ describe '#update_quality' do
       [
         Award.new('NORMAL ITEM', 5, 10),
         Award.new('Blue First', 3, 10),
+        Award.new('Blue First', -1, 49),
+        Award.new('Blue Distinction Plus', 3, 80),
+        Award.new('Blue Distinction Plus', 0, 0),
+        Award.new('Blue Compare', 3, 49),
+        Award.new('Blue Compare', 0, 50),
+        Award.new('Blue Star', 5, 30),
+        Award.new('Blue Star', 0, 50)
       ]
     }
 
@@ -232,6 +238,27 @@ describe '#update_quality' do
 
       specify { expect(awards[1].quality).to eq(11) }
       specify { expect(awards[1].expires_in).to eq(2) }
+
+      specify { expect(awards[2].quality).to eq(50) }
+      specify { expect(awards[2].expires_in).to eq(-2) }
+
+      specify { expect(awards[3].quality).to eq(80) }
+      specify { expect(awards[3].expires_in).to eq(3) }
+
+      specify { expect(awards[4].quality).to eq(80) }
+      specify { expect(awards[4].expires_in).to eq(0) }
+
+      specify { expect(awards[5].quality).to eq(50) }
+      specify { expect(awards[5].expires_in).to eq(2) }
+
+      specify { expect(awards[6].quality).to eq(0) }
+      specify { expect(awards[6].expires_in).to eq(-1) }
+
+      specify { expect(awards[7].quality).to eq(28) }
+      specify { expect(awards[7].expires_in).to eq(4) }
+
+      specify { expect(awards[8].quality).to eq(46) }
+      specify { expect(awards[8].expires_in).to eq(-1) }
     end
   end
 end

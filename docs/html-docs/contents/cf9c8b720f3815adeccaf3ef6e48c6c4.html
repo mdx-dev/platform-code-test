@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Zelis Take Home Assignment</title>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Source+Code+Pro:300,400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="../assets/css/bootstrap.css">
+<link rel="stylesheet" href="../assets/css/jquery.bonsai.css">
+<link rel="stylesheet" href="../assets/css/main.css">
+<link rel="stylesheet" href="../assets/icon-font/icons.css">
+<script type="text/javascript" src="../assets/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="../assets/js/jquery.bonsai.js"></script>
+
+  </head>
+  <body>
+    <div>
+
+      <!-- Name Title -->
+
+      <h1>Zelis Take Home Assignment</h1>
+
+      <!-- Type and Stereotype -->
+
+      <section style="margin-top: .5em;">
+        <span class="alert alert-info">
+          <span class="node-icon staruml-icon icon-Project"></span>
+          Project
+        </span>
+        
+      </section>
+
+      <!-- Path -->
+
+      <section style="margin-top: 10px">
+        
+        
+        
+          
+          <span class="label label-info"><a href='cf9c8b720f3815adeccaf3ef6e48c6c4.html'><span class='node-icon staruml-icon icon-Project'></span>Zelis Take Home Assignment</a></span>
+        
+      </section>
+
+      <!-- Diagram -->
+
+      
+
+      <!-- Description -->
+
+      
+      <section>
+        <h3>Description</h3>
+        <div>
+          
+            <h1>Sapphire Digital Code Test</h1>
+
+<h1>Description</h1>
+
+<p>Hi, and welcome to the team! As you know, we provide tools for searching for doctors and hospitals (i.e. &quot;providers&quot;) based on various criteria. One type of search that we provide is to find providers that are highly rated by quality.</p>
+
+<p>To calculate quality, one measure we use is a score based on professional award recognitions. Each award is factored in slightly differently.</p>
+
+<ul><li><p>All awards have an expires_in value which denotes the number of days until the award expires.</p></li><li><p>All awards have a quality value which denotes how valuable the award is in our overall calculation.</p></li><li><p>At the end of each day our system recalculates both values for every award based on business rules.</p></li></ul>
+
+<p>Pretty basic. But here is where it gets interesting...</p>
+
+<ul><li><p>Once the expiration date has passed, quality score degrades twice as fast</p></li><li><p>The quality of an award is never negative.</p></li><li><p>&quot;Blue First&quot; awards actually increase in quality the older they get</p></li><li><p>The quality of an award is never more than 50</p></li><li><p>&quot;Blue Distinction Plus&quot;, being a highly sought distinction, never decreases in quality</p></li><li><p>&quot;Blue Compare&quot;, similar to &quot;Blue First&quot;, increases in quality as the expiration date approaches; Quality increases by 2 when there are 10 days or less left, and by 3 where there are 5 days or less left, but quality value drops to 0 after the expiration date.</p></li><li><p>Just for clarification, an award can never have its quality increase above 50, however &quot;Blue Distinction Plus&quot;, being highly sought, its quality is 80 and it never alters.</p></li></ul>
+
+<p>We have recently gotten a request from our clients to include an additional award in our quality calculations. This requires an update to our system.</p>
+
+<h1>Your Assignment</h1>
+
+<p>Here is the business story:</p>
+
+<ul><li><p>In order to distinguish between providers of high quality, as a consumer, I want to see &quot;Blue Star&quot; awarded providers near the top of the results when the award is initially granted, but it&#39;s impact should be smaller the longer it has been from the grant date.</p></li><li><p>Acceptance Criteria</p><ul><li>&quot;Blue Star&quot; awards should lose quality value twice as fast as normal awards.</li></ul></li></ul>
+
+<p>During Sprint Planning, you estimated the story to be between 1 and 3 story points (in general, this corresponds to a few hours to a couple of days). We have committed to complete this by the end of our Sprint which ends soon. Please fork the code and submit a link to your fork with your changes when you have completed the assignment.</p>
+
+<p>The existing code is &quot;legacy&quot;, and, ugh, it&#39;s ugly. We&#39;re attempting to move the legacy code toward a more object-oriented approach, and this would be a good time to refactor. Feel free to make any changes to the code as long as everything still works correctly and all specs pass. (Although, note that Awards are used elsewhere in the system, so their public interface must remain backward compatible).</p>
+          
+        </div>
+      </section>
+      
+
+      <!-- Specification -->
+
+      
+
+      <!-- Directed Relationship -->
+
+      
+
+      <!-- Undirected Relationship -->
+
+      
+
+      <!-- Classifier -->
+
+      
+
+      <!-- Interface -->
+
+      
+
+      <!-- Component -->
+
+      
+
+      <!-- Node -->
+
+      
+
+      <!-- Actor -->
+
+      
+
+      <!-- Use Case -->
+
+      
+
+      <!-- Template Parameters -->
+
+      
+
+      <!-- Literals -->
+
+      
+
+      <!-- Attributes -->
+
+      
+
+      <!-- Operations -->
+
+      
+
+      <!-- Receptions -->
+
+      
+
+      <!-- Extension Points -->
+
+      
+
+      <!-- Parameters -->
+
+      
+
+      <!-- Diagrams -->
+
+      
+      
+
+      <!-- Behavior -->
+
+      
+
+      <!-- Action -->
+
+      
+
+      <!-- Interaction -->
+
+      
+
+      <!-- CombinedFragment -->
+
+      
+
+      <!-- Activity -->
+
+      
+
+      <!-- State Machine -->
+
+      
+
+      <!-- State Machine -->
+
+      
+
+      <!-- State -->
+
+      
+
+      <!-- Vertex -->
+
+      
+
+      <!-- Transition -->
+
+      
+
+      <!-- Data Model (ERD) -->
+
+      
+
+      <!-- Columns (ERD) -->
+
+      
+
+      <!-- Related Entities (ERD) -->
+
+      
+
+      <!-- Data Flows (DFD) -->
+
+      
+
+      <!-- Flows (Flowchart) -->
+
+      
+
+      <!-- Properties -->
+
+      <section>
+        <h3>Properties</h3>
+        
+        <table class="table table-striped table-bordered">
+    <tr>
+        <th width="50%">Name</th>
+        <th width="50%">Value</th>
+    </tr>
+    
+    
+    
+    
+    
+    
+    
+    <tr>
+        <td>name</td>
+        <td>Zelis Take Home Assignment</td>
+    </tr>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <tr>
+        <td>author</td>
+        <td>Zack (Ziad) K</td>
+    </tr>
+    
+    
+    
+    
+    
+    <tr>
+        <td>company</td>
+        <td>Zelis</td>
+    </tr>
+    
+    
+    
+    
+    
+    <tr>
+        <td>copyright</td>
+        <td></td>
+    </tr>
+    
+    
+    
+    
+    
+    <tr>
+        <td>version</td>
+        <td></td>
+    </tr>
+    
+    
+    
+</table>                
+
+      </section>
+
+      <!-- Tags -->
+
+      
+
+      <!-- Constraints, Dependencies, Dependants -->
+
+      
+
+      <!-- Relationships -->
+
+      
+      
+
+
+      <!-- Owned Elements -->
+
+      
+      
+<section class="element-list">
+    <h3>Owned Elements</h3>
+    <ul class="nav nav-list">
+        
+        <li><a href='594af663de577680f35b13183109d675.html'><span class='node-icon staruml-icon icon-UMLModel'></span>Model</a></li>
+        
+    </ul>
+</section>
+
+
+
+    </div>
+  </body>
+</html>
