@@ -773,7 +773,7 @@
 											"top": 79,
 											"width": 135.255859375,
 											"height": 13,
-											"text": "blue_start_startegy"
+											"text": "blue_star_strategy"
 										},
 										{
 											"_type": "LabelView",
@@ -3833,7 +3833,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGG9M+68EHqJRY="
 							},
-							"name": "blue_start_startegy",
+							"name": "blue_star_strategy",
 							"ownedElements": [
 								{
 									"_type": "UMLGeneralization",
@@ -3955,6 +3955,7 @@
 							}
 						}
 					],
+					"documentation": "Represented our update_quality function as a class object for the sake of easy depiction",
 					"operations": [
 						{
 							"_type": "UMLOperation",
@@ -4174,37 +4175,6 @@
 									"_id": "AAAAAAGG9POSJFLsSvk=",
 									"_parent": {
 										"$ref": "AAAAAAGG9PNqW1Ll5Ws="
-									},
-									"name": "award",
-									"type": {
-										"$ref": "AAAAAAGG9NoQfUQQeVo="
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"_type": "UMLClass",
-					"_id": "AAAAAAGG+2G9oa4BYZg=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "normal_strategy",
-					"operations": [
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAGG+2H3N658ScU=",
-							"_parent": {
-								"$ref": "AAAAAAGG+2G9oa4BYZg="
-							},
-							"name": "update",
-							"parameters": [
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAGG+2IoUK6eXPY=",
-									"_parent": {
-										"$ref": "AAAAAAGG+2H3N658ScU="
 									},
 									"name": "award",
 									"type": {
