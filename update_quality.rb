@@ -2,7 +2,17 @@ require 'award'
 
 def update_quality(awards)
   awards.each do |award|
-    if award.name != 'Blue First' && award.name != 'Blue Compare'
+    #UserStory: Handle Blue Star Award here to lose quality value twice as fast as normal awards.
+    if award.name == 'Blue Star'
+      if award.quality > 0
+        if award.expires_in > 0
+          degradation_factor = 2  
+        else
+          degradation_factor = 4
+        end
+        award.quality -= degradation_factor
+      end
+    elsif award.name != 'Blue First' && award.name != 'Blue Compare'
       if award.quality > 0
         if award.name != 'Blue Distinction Plus'
           award.quality -= 1
@@ -32,7 +42,8 @@ def update_quality(awards)
       if award.name != 'Blue First'
         if award.name != 'Blue Compare'
           if award.quality > 0
-            if award.name != 'Blue Distinction Plus'
+            awardsNameArr = ['Blue Distinction Plus', 'Blue Star']
+            if !(awardsNameArr.include? award.name)
               award.quality -= 1
             end
           end
