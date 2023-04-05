@@ -6,7 +6,7 @@ describe '#update_quality' do
   context 'Given a single award' do
     let(:initial_expires_in) { 5 }
     let(:initial_quality) { 10 }
-    let(:award) { Award.new(name, initial_expires_in, initial_quality) }
+    let(:award) { AwardFactory.award(name, initial_expires_in, initial_quality) }
 
     context 'when quality is updated' do
       before do
@@ -177,7 +177,6 @@ describe '#update_quality' do
       end
 
       context 'given a Blue Star award' do
-        before { pending }
         let(:name) { 'Blue Star' }
         before { award.expires_in.should == initial_expires_in-1 }
 
@@ -217,8 +216,8 @@ describe '#update_quality' do
   context 'Given several award' do
     let(:awards) {
       [
-        Award.new('NORMAL ITEM', 5, 10),
-        Award.new('Blue First', 3, 10),
+        AwardFactory.award('NORMAL ITEM', 5, 10),
+        AwardFactory.award('Blue First', 3, 10),
       ]
     }
 
