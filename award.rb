@@ -16,6 +16,7 @@ class Award
     when 'NORMAL ITEM' then normal_item
     when 'Blue First' then blue_first
     when 'Blue Distinction Plus' then blue_distinction_plus
+    when 'Blue Compare' then blue_compare
     end
   end
 
@@ -50,5 +51,19 @@ class Award
   end
 
   def blue_distinction_plus
+  end
+
+  def blue_compare
+    case @expires_in
+    when 11..Float::INFINITY then @quality += 1
+    when 6..10 then @quality += 2
+    when 1..5 then @quality += 3
+    when 0 then @quality = 0
+    when -Float::INFINITY..-1 then @quality = 0
+    end
+
+    @quality = 50 if @quality > 50
+
+    @expires_in -= 1
   end
 end
