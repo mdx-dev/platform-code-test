@@ -17,6 +17,7 @@ class Award
     when 'Blue First' then blue_first
     when 'Blue Distinction Plus' then blue_distinction_plus
     when 'Blue Compare' then blue_compare
+    when 'Blue Star' then blue_star
     end
   end
 
@@ -64,6 +65,17 @@ class Award
 
     @quality = 50 if @quality > 50
 
+    @expires_in -= 1
+  end
+
+  def blue_star
+    if @expires_in > 0
+      @quality -= 2
+    elsif @expires_in <= 0
+      @quality -= 4
+    end
+
+    @quality = 0 if @quality < 0
     @expires_in -= 1
   end
 end
