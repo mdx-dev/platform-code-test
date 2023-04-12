@@ -1,7 +1,7 @@
 require 'award_system'
 
 class Award
-  attr_accessor :name, :expires_in, :quality
+  attr_reader :expires_in, :quality
 
   def initialize(name, expires_in, quality)
     @name = name
