@@ -2,6 +2,11 @@ require 'award'
 
 def update_quality(awards)
   awards.each do |award|
+    if AwardSystem::REFACTORED.include?(award.name)
+      award.calculate
+      next
+    end
+
     if award.name != 'Blue First' && award.name != 'Blue Compare'
       if award.quality > 0
         if award.name != 'Blue Distinction Plus'
