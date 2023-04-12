@@ -37,7 +37,7 @@ class Award
     end
 
     @quality = 0 if @quality < 0
-    @expires_in -= 1
+    decrement_expires_in
   end
 
   def blue_first
@@ -48,7 +48,7 @@ class Award
     end
 
     @quality = 50 if @quality > 50
-    @expires_in -= 1
+    decrement_expires_in
   end
 
   def blue_distinction_plus
@@ -64,8 +64,7 @@ class Award
     end
 
     @quality = 50 if @quality > 50
-
-    @expires_in -= 1
+    decrement_expires_in
   end
 
   def blue_star
@@ -76,6 +75,10 @@ class Award
     end
 
     @quality = 0 if @quality < 0
+    decrement_expires_in
+  end
+
+  def decrement_expires_in
     @expires_in -= 1
   end
 end
