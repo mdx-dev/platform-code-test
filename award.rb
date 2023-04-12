@@ -9,6 +9,7 @@ class Award
     @quality = quality
     @min_quality = 0
     @max_quality = 50
+    @decrements = true
     validate
   end
 
@@ -22,6 +23,7 @@ class Award
     end
 
     enforce_min_max
+    decrement_expires_in if @decrements
   end
 
   private
@@ -38,9 +40,6 @@ class Award
     else
       @quality -= 2
     end
-
-    @min_quality = 0
-    decrement_expires_in
   end
 
   def blue_first
@@ -49,11 +48,10 @@ class Award
     else
       @quality += 2
     end
-
-    decrement_expires_in
   end
 
   def blue_distinction_plus
+    @decrements = false
     @max_quality = 80
   end
 
@@ -65,8 +63,6 @@ class Award
     when 0 then @quality = 0
     when -Float::INFINITY..-1 then @quality = 0
     end
-
-    decrement_expires_in
   end
 
   def blue_star
@@ -75,8 +71,6 @@ class Award
     elsif @expires_in <= 0
       @quality -= 4
     end
-
-    decrement_expires_in
   end
 
   def decrement_expires_in
