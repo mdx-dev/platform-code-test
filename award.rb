@@ -15,9 +15,8 @@ class Award
     case @name
     when 'NORMAL ITEM' then normal_item
     when 'Blue First' then blue_first
+    when 'Blue Distinction Plus' then blue_distinction_plus
     end
-
-    @expires_in -= 1
   end
 
   private
@@ -36,6 +35,7 @@ class Award
     end
 
     @quality = 0 if @quality < 0
+    @expires_in -= 1
   end
 
   def blue_first
@@ -46,5 +46,9 @@ class Award
     end
 
     @quality = 50 if @quality > 50
+    @expires_in -= 1
+  end
+
+  def blue_distinction_plus
   end
 end
