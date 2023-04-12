@@ -7,7 +7,8 @@ class Award
     @name = name
     @expires_in = expires_in
     @quality = quality
-
+    @min_quality = 0
+    @max_quality = 50
     validate
   end
 
@@ -19,6 +20,8 @@ class Award
     when 'Blue Compare' then blue_compare
     when 'Blue Star' then blue_star
     end
+
+    enforce_min_max
   end
 
   private
@@ -36,7 +39,7 @@ class Award
       @quality -= 2
     end
 
-    @quality = 0 if @quality < 0
+    @min_quality = 0
     decrement_expires_in
   end
 
@@ -47,11 +50,11 @@ class Award
       @quality += 2
     end
 
-    @quality = 50 if @quality > 50
     decrement_expires_in
   end
 
   def blue_distinction_plus
+    @max_quality = 80
   end
 
   def blue_compare
@@ -63,7 +66,6 @@ class Award
     when -Float::INFINITY..-1 then @quality = 0
     end
 
-    @quality = 50 if @quality > 50
     decrement_expires_in
   end
 
@@ -74,11 +76,15 @@ class Award
       @quality -= 4
     end
 
-    @quality = 0 if @quality < 0
     decrement_expires_in
   end
 
   def decrement_expires_in
     @expires_in -= 1
+  end
+
+  def enforce_min_max
+    @quality = @min_quality if @min_quality && @quality < @min_quality
+    @quality = @max_quality if @max_quality && @quality > @max_quality
   end
 end
