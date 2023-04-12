@@ -12,11 +12,12 @@ class Award
   end
 
   def calculate
-    @expires_in -= 1
-
     case @name
+    when 'NORMAL ITEM' then normal_item
     when 'Blue First' then blue_first
     end
+
+    @expires_in -= 1
   end
 
   private
@@ -25,6 +26,16 @@ class Award
     unless AwardSystem::AWARD_NAMES.include?(@name)
       raise ArgumentError.new("Award name must be one of: #{AwardSystem::AWARD_NAMES}")
     end
+  end
+
+  def normal_item
+    if @expires_in > 0
+      @quality -= 1
+    else
+      @quality -= 2
+    end
+
+    @quality = 0 if @quality < 0
   end
 
   def blue_first

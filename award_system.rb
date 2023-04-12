@@ -1,4 +1,4 @@
 module AwardSystem
   AWARD_NAMES = ['NORMAL ITEM', 'Blue First', 'Blue Distinction Plus', 'Blue Compare', 'Blue Star'].freeze
-  REFACTORED = ['Blue First']
+  REFACTORED = ['NORMAL ITEM', 'Blue First'].freeze
 end
