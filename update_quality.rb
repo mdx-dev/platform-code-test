@@ -1,18 +1,21 @@
 require 'award'
 
+MAX_QUALITY = 50.freeze
+MIN_QUALITY = 0.freeze
+
 def update_quality(awards)
   awards.each do |award|
     # blue distinction plus never changes value or expires
     return if award.name == "Blue Distinction Plus"
 
     award.expires_in -= 1
-    break if award.quality == 0 || award.quality == 50
+    return if award.quality == MIN_QUALITY || award.quality == MAX_QUALITY
 
     case award.name
     when "Blue Compare"
       # no value after expiration date
       if award.expires_in < 0
-        award.quality = 0
+        award.quality = MIN_QUALITY
         break
       end
 
@@ -32,10 +35,10 @@ def update_quality(awards)
       multiplier = (award.name == "Blue Star" ? 2 : 1)
       # decrease double points for expired
       award.quality -= (award.expires_in < 0 ? 2*multiplier : 1*multiplier)
-      award.quality = 0 if award.quality < 0 # reset if under 0
+      award.quality = 0 if award.quality < MIN_QUALITY # reset if under 0
     end
 
     # reset if over 50
-    award.quality = 50 if award.quality > 50
+    award.quality = MAX_QUALITY if award.quality > MAX_QUALITY
   end
 end
