@@ -1,49 +1,34 @@
 require 'award'
+require 'updaters/blue_first_up'
+require 'updaters/blue_comp_up'
+require 'updaters/blue_star_up'
+require 'updaters/blue_dist_plus_up'
+require 'contraints/value_constraint'
+require 'contraints/exception'
 
 def update_quality(awards)
   awards.each do |award|
-    if award.name != 'Blue First' && award.name != 'Blue Compare'
-      if award.quality > 0
-        if award.name != 'Blue Distinction Plus'
-          award.quality -= 1
-        end
-      end
+    
+    case award.name
+    #Blue Compare Award
+    when 'Blue Compare'
+      BlueCompare.new.update_quality(award)
+
+    when 'Blue Star'
+      BlueStar.new.update_quality(award)
+    
+    # Blue First Award
+    when 'Blue First'
+      BlueFirst.new.update_quality(award)
+
+    # Blue Distinction Plus Award
     else
-      if award.quality < 50
-        award.quality += 1
-        if award.name == 'Blue Compare'
-          if award.expires_in < 11
-            if award.quality < 50
-              award.quality += 1
-            end
-          end
-          if award.expires_in < 6
-            if award.quality < 50
-              award.quality += 1
-            end
-          end
-        end
-      end
+      BlueDistinctionPlus.new.update_quality(award)
     end
-    if award.name != 'Blue Distinction Plus'
-      award.expires_in -= 1
-    end
-    if award.expires_in < 0
-      if award.name != 'Blue First'
-        if award.name != 'Blue Compare'
-          if award.quality > 0
-            if award.name != 'Blue Distinction Plus'
-              award.quality -= 1
-            end
-          end
-        else
-          award.quality = award.quality - award.quality
-        end
-      else
-        if award.quality < 50
-          award.quality += 1
-        end
-      end
-    end
+
+  # Sets qaulity to range 0-50
+  ValueConstraint.new.update_quality(award)
+  # Ecxeption for Blue Distinction Plus quaility decreasement
+  Exception.new.update_quality(award)
   end
 end
