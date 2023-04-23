@@ -1,5 +1,11 @@
 require 'rspec'
 require 'update_quality'
+require 'normal'
+require 'blue_first'
+require 'blue_distinction'
+require 'blue_compare'
+require 'blue_star'
+
 
 describe '#update_quality' do
 
