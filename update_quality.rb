@@ -27,9 +27,10 @@ end
 
 def update_blue_first_quality(award)
   award.expires_in -= 1
+  return if award.quality >= 50
+
   award.quality += 1
   award.quality += 1 if award.expires_in <= 0
-  award.quality = 50 if award.quality > 50
 end
 
 def update_blue_distinction_plus_quality(award); end
@@ -42,8 +43,6 @@ def update_blue_compare_quality(award)
   award.quality += 1
   award.quality += 1 if award.expires_in < 10
   award.quality += 1 if award.expires_in < 5
-
-  award.quality = [award.quality, 50].min
 end
 
 def update_blue_star_quality(award)

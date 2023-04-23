@@ -9,5 +9,3 @@ class Award
     @quality = quality
   end
 end
-
-
