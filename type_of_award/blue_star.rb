@@ -1,12 +1,6 @@
-class BlueStar
-  attr_reader :award
-
-  def initialize(award)
-    @award = award
-  end
-
+class BlueStar < AwardType
   def update
-    award.expires_in -= 1
+    super
     return if award.quality.zero?
 
     award.quality -= 2

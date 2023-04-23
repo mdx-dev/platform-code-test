@@ -1,4 +1,4 @@
-class BlueDistinction
+class AwardType
   attr_reader :award
 
   def initialize(award)
@@ -6,6 +6,6 @@ class BlueDistinction
   end
 
   def update
-    # do nothing
+    award.expires_in -= 1
   end
 end

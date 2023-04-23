@@ -1,12 +1,6 @@
-class BlueCompare
-  attr_reader :award
-
-  def initialize(award)
-    @award = award
-  end
-
+class BlueCompare < AwardType
   def update
-    award.expires_in -= 1
+    super
     return if award.quality >= 50
     return award.quality = 0 if award.expires_in.negative?
 
