@@ -1,6 +1,6 @@
 class Normal < AwardType
-  def update
-    super
+  def update_attributes
+    award.expires_in -= 1
     return if award.quality.zero?
 
     award.quality -= 1

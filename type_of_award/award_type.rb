@@ -5,7 +5,5 @@ class AwardType
     @award = award
   end
 
-  def update
-    award.expires_in -= 1
-  end
+  def update_attributes; end
 end

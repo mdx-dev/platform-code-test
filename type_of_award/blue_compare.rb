@@ -1,6 +1,6 @@
 class BlueCompare < AwardType
-  def update
-    super
+  def update_attributes
+    award.expires_in -= 1
     return if award.quality >= 50
     return award.quality = 0 if award.expires_in.negative?
 
