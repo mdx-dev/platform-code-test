@@ -2,18 +2,23 @@ require 'award'
 
 def update_quality(awards)
   awards.each do |award|
-    award_type_class = case award.name
-                       when 'NORMAL ITEM'
-                         Normal
-                       when 'Blue First'
-                         BlueFirst
-                       when 'Blue Distinction Plus'
-                         BlueDistinctionPlus
-                       when 'Blue Compare'
-                         BlueCompare
-                       when 'Blue Star'
-                         BlueStar
-                       end
-    award_type_class.new(award).update
+    create_award_type(award).update
+  end
+end
+
+def create_award_type(award)
+  case award.name
+  when 'NORMAL ITEM'
+    Normal.new(award)
+  when 'Blue First'
+    BlueFirst.new(award)
+  when 'Blue Distinction Plus'
+    AwardType.new(award)
+  when 'Blue Compare'
+    BlueCompare.new(award)
+  when 'Blue Star'
+    BlueStar.new(award)
+  else
+    raise "Unknown award type: #{award.name}"
   end
 end
