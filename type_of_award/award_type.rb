@@ -5,5 +5,5 @@ class AwardType
     @award = award
   end
 
-  def update; end
+  def update_attributes; end
 end
