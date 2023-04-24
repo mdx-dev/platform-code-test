@@ -1,4 +1,4 @@
-require 'award_quality_decay_processor'
+require 'award_quality_decay_processors'
 require 'award'
 
 class AwardQualityDailyDecayJob
