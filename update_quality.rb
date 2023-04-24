@@ -4,7 +4,7 @@ require 'award_quality_daily_decay_job'
 def update_quality(awards)
   awards.each do |award|
 
-    if ['Blue First'].include? award.name
+    if ['Blue First', 'Blue Compare'].include? award.name
       AwardQualityDailyDecayJob.update(award)
       return
     end
