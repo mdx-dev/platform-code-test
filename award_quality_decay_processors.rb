@@ -77,5 +77,11 @@ module AwardQualityDecayProcessors
       super(msg)
     end
   end
+
+  class UnknownProcessor < StandardError
+    def initialize(msg="")
+      super(msg)
+    end
+  end
   
 end

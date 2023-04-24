@@ -33,4 +33,16 @@ class Award
     return if self.name.eql? 'Blue Distinction Plus'
     self.expires_in -= amount
   end
+
+  def quality_decay_processor
+    {
+      'Blue First' => AwardQualityDecayProcessors::BlueFirst,
+      'Blue Compare' => AwardQualityDecayProcessors::BlueCompare,
+      'Blue Distinction Plus' => AwardQualityDecayProcessors::BlueDistinctionPlus,
+      'NORMAL ITEM' => AwardQualityDecayProcessors::NormalItem,
+      'Blue Star' => AwardQualityDecayProcessors::BlueStar
+    }.fetch(self.name) do |award_name|
+      raise(AwardQualityDecayProcessors::UnknownProcessor.new("No decay processor found for: #{award_name}"))
+    end
+  end
 end
