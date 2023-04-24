@@ -54,6 +54,26 @@ module AwardQualityDecayProcessors
     end
   end
 
+  class BlueDistinctionPlus
+    AWARD_NAME = 'Blue Distinction Plus'
+
+    def self.decay(award)
+      raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
+    end
+  end
+
+  class NormalItem
+    AWARD_NAME = 'NORMAL ITEM'
+
+    def self.decay(award)
+      award.quality -= 1
+      award.expires_in -= 1
+      return if award.expires_in >= 0
+      award.quality -= 1
+    end
+
+  end
+
   class InvalidAward < StandardError
     def initialize(msg="")
       super(msg)

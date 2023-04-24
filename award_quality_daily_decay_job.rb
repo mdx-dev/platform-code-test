@@ -18,7 +18,9 @@ class AwardQualityDailyDecayJob
   def self.retrieve_processor(award)
     {
       'Blue First' => AwardQualityDecayProcessors::BlueFirst,
-      'Blue Compare' => AwardQualityDecayProcessors::BlueCompare
+      'Blue Compare' => AwardQualityDecayProcessors::BlueCompare,
+      'Blue Distinction Plus' => AwardQualityDecayProcessors::BlueDistinctionPlus,
+      'NORMAL ITEM' => AwardQualityDecayProcessors::NormalItem
     }.fetch(award.name) do |award_name|
       raise(UnknownAwardQualityDecayProcessor.new("No decay processor found for: #{award_name}"))
     end
