@@ -20,7 +20,8 @@ class AwardQualityDailyDecayJob
       'Blue First' => AwardQualityDecayProcessors::BlueFirst,
       'Blue Compare' => AwardQualityDecayProcessors::BlueCompare,
       'Blue Distinction Plus' => AwardQualityDecayProcessors::BlueDistinctionPlus,
-      'NORMAL ITEM' => AwardQualityDecayProcessors::NormalItem
+      'NORMAL ITEM' => AwardQualityDecayProcessors::NormalItem,
+      'Blue Star' => AwardQualityDecayProcessors::BlueStar
     }.fetch(award.name) do |award_name|
       raise(UnknownAwardQualityDecayProcessor.new("No decay processor found for: #{award_name}"))
     end

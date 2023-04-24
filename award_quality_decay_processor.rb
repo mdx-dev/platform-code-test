@@ -74,6 +74,17 @@ module AwardQualityDecayProcessors
 
   end
 
+  class BlueStar
+    AWARD_NAME = 'Blue Star'
+
+    def self.decay(award)
+      award.quality -= 2
+      award.expires_in -= 1
+      return if award.expires_in >= 0
+      award.quality -= 2
+    end
+  end
+
   class InvalidAward < StandardError
     def initialize(msg="")
       super(msg)
