@@ -1,19 +1,63 @@
-class AwardQualityDecayProcessor
-  def self.decay(award)
-    if award.name.eql? 'Blue First'
+module AwardQualityDecayProcessors
+  class BlueFirst
+    AWARD_NAME = 'Blue First'
+
+    def self.decay(award)
+      raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
+
+      if award.quality < 50
+        award.quality += 1
+      end
+
+      award.expires_in -= 1
+
+      return if award.expires_in >= 0
+
       if award.quality < 50
         award.quality += 1
       end
     end
   end
 
-  def self.decay_when_expired(award)
-    return if award.expires_in.positive?
+  class BlueCompare
+    AWARD_NAME = 'Blue Compare'
 
-    if award.name.eql? 'Blue First'
+    def self.decay(award)
+      raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
+
+      # increment if the quality is currently less than 50
       if award.quality < 50
         award.quality += 1
       end
+
+      # increment if the award expires in the next 11 days
+      if award.expires_in < 11
+        if award.quality < 50
+          award.quality += 1
+        end
+      end
+
+      # increment again if the award expires in the next 6 days
+      if award.expires_in < 6
+        if award.quality < 50
+          award.quality += 1
+        end
+      end
+
+      # decrement the expiration
+      award.expires_in -= 1
+
+      return if award.expires_in >= 0
+
+      # set quality to zero if the award expires today
+      award.quality = award.quality - award.quality
     end
   end
+
+  class InvalidAward < StandardError
+    def initialize(msg="")
+      super(msg)
+    end
+  end
+  
 end
