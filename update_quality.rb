@@ -2,7 +2,7 @@ require 'award'
 
 def update_quality(awards)
   awards.each do |award|
-    create_award_type(award).update_attributes
+    create_award_type(award).update
   end
 end
 

@@ -1,4 +1,6 @@
 class BlueFirst < AwardType
+  private
+
   def update_attributes
     award.expires_in -= 1
     award.quality += 1
