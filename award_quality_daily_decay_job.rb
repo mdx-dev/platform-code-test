@@ -5,14 +5,9 @@ class AwardQualityDailyDecayJob
   def self.update(award)
     processor = retrieve_processor(award)
 
-    # decay the award
-    processor.decay(award)
+    award.decrement_expires_in
 
-#     decrement expiration
-#     # award.expires_in -= 1
-# # 
-#     additional decay for when award is expired
-#     # processor.decay_expired(award)
+    processor.decay(award)
   end
 
   def self.retrieve_processor(award)
