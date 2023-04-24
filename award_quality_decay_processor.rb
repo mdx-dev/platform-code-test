@@ -1,43 +1,46 @@
 module AwardQualityDecayProcessors
   class BlueFirst
     AWARD_NAME = 'Blue First'
+    DECAY_AMOUNT = 1
 
     def self.decay(award)
       raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
 
-      award.quality += 1
+      award.quality += DECAY_AMOUNT
 
       return if award.expires_in >= 0
 
-      award.quality += 1
+      award.quality += DECAY_AMOUNT
     end
   end
 
   class BlueCompare
     AWARD_NAME = 'Blue Compare'
+    DECAY_AMOUNT = 1
 
     def self.decay(award)
       raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
 
-      award.quality += 1
+      award.quality += DECAY_AMOUNT
 
       if award.expires_in < 10
-        award.quality += 1
+        award.quality += DECAY_AMOUNT
       end
 
       if award.expires_in < 5
-        award.quality += 1
+        award.quality += DECAY_AMOUNT
       end
 
       return if award.expires_in >= 0
 
-      # set quality to zero if the award expires today
-      award.quality = award.quality - award.quality
+      # set quality to zero if the award is expired
+      award.quality = 0
     end
   end
 
   class BlueDistinctionPlus
     AWARD_NAME = 'Blue Distinction Plus'
+    DECAY_AMOUNT = 0
 
     def self.decay(award)
       raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
@@ -46,22 +49,24 @@ module AwardQualityDecayProcessors
 
   class NormalItem
     AWARD_NAME = 'NORMAL ITEM'
+    DECAY_AMOUNT = 1
 
     def self.decay(award)
-      award.quality -= 1
+      award.quality -= DECAY_AMOUNT
       return if award.expires_in >= 0
-      award.quality -= 1
+      award.quality -= DECAY_AMOUNT
     end
 
   end
 
   class BlueStar
     AWARD_NAME = 'Blue Star'
+    DECAY_AMOUNT = 2
 
     def self.decay(award)
-      award.quality -= 2
+      award.quality -= DECAY_AMOUNT
       return if award.expires_in >= 0
-      award.quality -= 2
+      award.quality -= DECAY_AMOUNT
     end
   end
 
