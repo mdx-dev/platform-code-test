@@ -1,7 +1,6 @@
 require 'rspec'
-require 'spec_helper'
 require 'update_quality'
-Dir.glob('type_of_award/*.rb').sort.each { |file| require file }
+require 'spec_helper'
 
 describe '#update_quality' do
 
