@@ -1,7 +1,15 @@
 require 'award'
+require 'award_quality_daily_decay_job'
 
 def update_quality(awards)
   awards.each do |award|
+
+    if ['Blue First'].include? award.name
+      AwardQualityDailyDecayJob.update(award)
+      return
+    end
+
+    # "standard" quality decay
     if award.name != 'Blue First' && award.name != 'Blue Compare'
       if award.quality > 0
         if award.name != 'Blue Distinction Plus'
@@ -12,7 +20,7 @@ def update_quality(awards)
           end
         end
       end
-    else
+    else # Blue First & Blue Compare
       if award.quality < 50
         award.quality += 1
         if award.name == 'Blue Compare'
@@ -29,9 +37,15 @@ def update_quality(awards)
         end
       end
     end
+
+
     if award.name != 'Blue Distinction Plus'
       award.expires_in -= 1
     end
+
+
+
+    # additional expired quality decay
     if award.expires_in < 0
       if award.name != 'Blue First'
         if award.name != 'Blue Compare'
