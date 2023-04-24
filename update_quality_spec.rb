@@ -196,7 +196,9 @@ describe '#update_quality' do
 
         context 'on expiration date' do
           let(:initial_expires_in) { 0 }
-          specify { expect(award.quality).to eq(initial_quality-4) }
+          specify { 
+            expect(award.quality).to eq(initial_quality-4)
+          }
 
           context 'at zero quality' do
             let(:initial_quality) { 0 }
