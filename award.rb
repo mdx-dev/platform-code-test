@@ -11,4 +11,9 @@ class Award
   def quality=(quality)
     @quality = quality.positive? ? quality : 0
   end
+
+  def decrement_expires_in(amount=1)
+    return if self.name.eql? 'Blue Distinction Plus'
+    self.expires_in -= amount
+  end
 end
