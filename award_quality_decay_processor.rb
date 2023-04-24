@@ -5,15 +5,11 @@ module AwardQualityDecayProcessors
     def self.decay(award)
       raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
 
-      if award.quality < 50
-        award.quality += 1
-      end
+      award.quality += 1
 
       return if award.expires_in >= 0
 
-      if award.quality < 50
-        award.quality += 1
-      end
+      award.quality += 1
     end
   end
 
@@ -23,20 +19,14 @@ module AwardQualityDecayProcessors
     def self.decay(award)
       raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
 
-      if award.quality < 50
+      award.quality += 1
+
+      if award.expires_in < 10
         award.quality += 1
       end
 
-      if award.expires_in < 10
-        if award.quality < 50
-          award.quality += 1
-        end
-      end
-
       if award.expires_in < 5
-        if award.quality < 50
-          award.quality += 1
-        end
+        award.quality += 1
       end
 
       return if award.expires_in >= 0
@@ -70,7 +60,6 @@ module AwardQualityDecayProcessors
 
     def self.decay(award)
       award.quality -= 2
-      # award.expires_in -= 1
       return if award.expires_in >= 0
       award.quality -= 2
     end
