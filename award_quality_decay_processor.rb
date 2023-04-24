@@ -54,6 +54,7 @@ module AwardQualityDecayProcessors
     def self.decay(award)
       award.quality -= DECAY_AMOUNT
       return if award.expires_in >= 0
+
       award.quality -= DECAY_AMOUNT
     end
 
@@ -66,6 +67,7 @@ module AwardQualityDecayProcessors
     def self.decay(award)
       award.quality -= DECAY_AMOUNT
       return if award.expires_in >= 0
+
       award.quality -= DECAY_AMOUNT
     end
   end
