@@ -1,16 +1,32 @@
 require 'award_quality_decay_processor'
+require 'award'
 
 class AwardQualityDailyDecayJob
   def self.update(award)
-    if award.name.eql? 'Blue First'
-      # decay the award
-      AwardQualityDecayProcessor.decay(award)
+    processor = retrieve_processor(award)
 
-      # decrement expiration
-      award.expires_in -= 1
+    # decay the award
+    processor.decay(award)
 
-      # additional decay when award is expired
-      AwardQualityDecayProcessor.decay_when_expired(award)
+#     decrement expiration
+#     # award.expires_in -= 1
+# # 
+#     additional decay for when award is expired
+#     # processor.decay_expired(award)
+  end
+
+  def self.retrieve_processor(award)
+    {
+      'Blue First' => AwardQualityDecayProcessors::BlueFirst,
+      'Blue Compare' => AwardQualityDecayProcessors::BlueCompare
+    }.fetch(award.name) do |award_name|
+      raise(UnknownAwardQualityDecayProcessor.new("No decay processor found for: #{award_name}"))
     end
+  end
+end
+
+class UnknownAwardQualityDecayProcessor < StandardError
+  def initialize(msg="")
+    super(msg)
   end
 end
