@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module AwardQualityDecayProcessors
   def retrieve_processor(award)
     processor_class = {
@@ -9,12 +7,11 @@ module AwardQualityDecayProcessors
       'NORMAL ITEM' => NormalItem,
       'Blue Star' => BlueStar
     }.fetch(award.name) do |award_name|
-      raise UnknownProcessor, "No decay processor found for: #{award_name}"
+      raise(UnknownProcessor.new("No decay processor found for: #{award_name}"))
     end
 
     processor_class.new(award)
   end
-
   class BlueFirst
     VALID_AWARD_NAME = 'Blue First'
     DECAY_AMOUNT = 1
@@ -22,7 +19,7 @@ module AwardQualityDecayProcessors
     def initialize(award)
       return if award.nil?
 
-      raise InvalidAward, award.name unless award.name.eql? VALID_AWARD_NAME
+      raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
       @award = award
     end
@@ -43,17 +40,17 @@ module AwardQualityDecayProcessors
     def initialize(award)
       return if award.nil?
 
-      raise InvalidAward, award.name unless award.name.eql? VALID_AWARD_NAME
+      raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
       @award = award
     end
 
     def decay
       @award.quality += DECAY_AMOUNT
-
+      
       # decay again
       @award.quality += DECAY_AMOUNT if @award.expires_in < 10
-
+      
       # decay again again
       @award.quality += DECAY_AMOUNT if @award.expires_in < 5
 
@@ -68,7 +65,8 @@ module AwardQualityDecayProcessors
     VALID_AWARD_NAME = 'Blue Distinction Plus'
     DECAY_AMOUNT = 0
 
-    def initialize(award); end
+    def initialize(award)
+    end
 
     def decay; end
   end
@@ -80,7 +78,7 @@ module AwardQualityDecayProcessors
     def initialize(award)
       return if award.nil?
 
-      raise InvalidAward, award.name unless award.name.eql? VALID_AWARD_NAME
+      raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
       @award = award
     end
@@ -91,6 +89,7 @@ module AwardQualityDecayProcessors
 
       @award.quality -= DECAY_AMOUNT
     end
+
   end
 
   class BlueStar
@@ -100,7 +99,7 @@ module AwardQualityDecayProcessors
     def initialize(award)
       return if award.nil?
 
-      raise InvalidAward, award.name unless award.name.eql? VALID_AWARD_NAME
+      raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
       @award = award
     end
@@ -114,14 +113,15 @@ module AwardQualityDecayProcessors
   end
 
   class InvalidAward < StandardError
-    def initialize(msg = '')
+    def initialize(msg="")
       super(msg)
     end
   end
 
   class UnknownProcessor < StandardError
-    def initialize(msg = '')
+    def initialize(msg="")
       super(msg)
     end
   end
+  
 end
