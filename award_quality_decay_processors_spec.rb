@@ -4,9 +4,8 @@ require 'rspec'
 require 'award'
 require 'award_quality_decay_processors'
 
-
 RSpec.describe AwardQualityDecayProcessors do
-  let(:testing_class){ Class.new{ extend AwardQualityDecayProcessors }}
+  let(:testing_class) { Class.new { extend AwardQualityDecayProcessors } }
 
   it 'will return the proper processor for each award type' do
     [['Blue First', AwardQualityDecayProcessors::BlueFirst],
