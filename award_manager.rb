@@ -1,12 +1,12 @@
 class AwardManager
   attr_accessor :award
 
-  def initialise(award)
+  def initialize(award)
     @award = award
   end
 
   def update_quality
-    unless award.name === 'Blue Distinction Plus'
+    unless award.name == 'Blue Distinction Plus'
       case award.name
       when 'Blue Compare'
         blue_compare
@@ -23,6 +23,9 @@ class AwardManager
   end
 
   private
+  # quality score degrades by 1 before the expiration
+  # quality score degrades by 2 after the expiration
+  # quality can't be less than 0
 
   def normal_award
     if award.expires_in > 0 && award.quality > 0
@@ -30,14 +33,49 @@ class AwardManager
     elsif award.expires_in <= 0 && award.quality > 0
       award.quality -= 2
     end
+
+    award.quality = 0 if award.quality < 0
   end
+
+  # quality increases by 1 before expiration
+  # quality increases by 2 on the day of expiration and after
+  # quality can't be greater than 50
+  
+  def blue_first
+    if award.expires_in > 0 && award.quality < 50
+      award.quality += 1
+    elsif award.expires_in <= 0 && award.quality < 50
+      award.quality += 2
+    end
+  end
+
+  # quality increases by 1 before expiration
+  # quality increases by 2 when expires_in <= 10
+  # quality increases by 3 when expires_in <= 5
+  # quality = 0 when expires_in <= 0
 
   def blue_compare
+    if award.expires_in > 10
+      award.quality += 1
+    elsif award.expires_in <= 10 && award.expires_in > 5
+      award.quality += 2
+    elsif award.expires_in <= 5 && award.expires_in > 0
+      award.quality += 3
+    else
+      award.quality = 0
+    end
   end
 
-  def blue_first
-  end
+  # quality degrades by 2 before the expiration
+  # quality degrades by 4 after the expiration
 
   def blue_star
+    if award.expires_in > 0 && award.quality > 0
+      award.quality -= 2
+    elsif award.expires_in <= 0 && award.quality > 0
+      award.quality -= 4
+    end
+
+    award.quality = 0 if award.quality < 0
   end
 end
