@@ -35,7 +35,7 @@ class Award
   end
 
   def quality_decay_processor
-    {
+    processor_class = {
       'Blue First' => AwardQualityDecayProcessors::BlueFirst,
       'Blue Compare' => AwardQualityDecayProcessors::BlueCompare,
       'Blue Distinction Plus' => AwardQualityDecayProcessors::BlueDistinctionPlus,
@@ -44,5 +44,7 @@ class Award
     }.fetch(self.name) do |award_name|
       raise(AwardQualityDecayProcessors::UnknownProcessor.new("No decay processor found for: #{award_name}"))
     end
+
+    return processor_class.new(self)
   end
 end
