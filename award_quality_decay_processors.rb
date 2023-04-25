@@ -17,22 +17,20 @@ module AwardQualityDecayProcessors
     VALID_AWARD_NAME = 'Blue First'
     DECAY_AMOUNT = 1
 
-    attr_accessor :award
-
     def initialize(award)
       return if award.nil?
 
       raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
-      self.award = award
+      @award = award
     end
 
     def decay
-      self.award.quality += DECAY_AMOUNT
+      @award.quality += DECAY_AMOUNT
 
-      return if self.award.expires_in >= 0
+      return if @award.expires_in >= 0
 
-      self.award.quality += DECAY_AMOUNT
+      @award.quality += DECAY_AMOUNT
     end
   end
 
@@ -40,29 +38,27 @@ module AwardQualityDecayProcessors
     VALID_AWARD_NAME = 'Blue Compare'
     DECAY_AMOUNT = 1
 
-    attr_accessor :award
-
     def initialize(award)
       return if award.nil?
 
       raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
-      self.award = award
+      @award = award
     end
 
     def decay
-      self.award.quality += DECAY_AMOUNT
+      @award.quality += DECAY_AMOUNT
       
       # decay again
-      self.award.quality += DECAY_AMOUNT if self.award.expires_in < 10
+      @award.quality += DECAY_AMOUNT if @award.expires_in < 10
       
       # decay again again
-      self.award.quality += DECAY_AMOUNT if self.award.expires_in < 5
+      @award.quality += DECAY_AMOUNT if @award.expires_in < 5
 
-      return if self.award.expires_in >= 0
+      return if @award.expires_in >= 0
 
       # set quality to zero if the award is expired
-      self.award.quality = 0
+      @award.quality = 0
     end
   end
 
@@ -70,14 +66,7 @@ module AwardQualityDecayProcessors
     VALID_AWARD_NAME = 'Blue Distinction Plus'
     DECAY_AMOUNT = 0
 
-    attr_accessor :award
-
     def initialize(award)
-      return if award.nil?
-
-      raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
-
-      self.award = award
     end
 
     def decay; end
@@ -87,21 +76,19 @@ module AwardQualityDecayProcessors
     VALID_AWARD_NAME = 'NORMAL ITEM'
     DECAY_AMOUNT = 1
 
-    attr_accessor :award
-
     def initialize(award)
       return if award.nil?
 
       raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
-      self.award = award
+      @award = award
     end
 
     def decay
-      self.award.quality -= DECAY_AMOUNT
-      return if self.award.expires_in >= 0
+      @award.quality -= DECAY_AMOUNT
+      return if @award.expires_in >= 0
 
-      self.award.quality -= DECAY_AMOUNT
+      @award.quality -= DECAY_AMOUNT
     end
 
   end
@@ -110,21 +97,19 @@ module AwardQualityDecayProcessors
     VALID_AWARD_NAME = 'Blue Star'
     DECAY_AMOUNT = 2
 
-    attr_accessor :award
-
     def initialize(award)
       return if award.nil?
 
       raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
-      self.award = award
+      @award = award
     end
 
     def decay
-      self.award.quality -= DECAY_AMOUNT
-      return if self.award.expires_in >= 0
+      @award.quality -= DECAY_AMOUNT
+      return if @award.expires_in >= 0
 
-      self.award.quality -= DECAY_AMOUNT
+      @award.quality -= DECAY_AMOUNT
     end
   end
 
