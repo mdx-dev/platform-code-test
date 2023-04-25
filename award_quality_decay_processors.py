@@ -1,6 +1,7 @@
 # need this import for type annotations
 from __future__ import annotations
 
+from abc import ABC, abstractmethod
 
 # only import Award if we're type checking
 # otherwise we'll get a circular import error
@@ -10,25 +11,22 @@ if TYPE_CHECKING:
     from award import Award
 
 
-from abc import ABC, abstractmethod
-
-
 class QualityDecayProcessor(ABC):
     @property
     @abstractmethod
-    def VALID_AWARD_NAME(self) -> str:
+    def valid_award_name(self) -> str:
         pass
 
     @property
     @abstractmethod
-    def DECAY_AMOUNT(self) -> int:
+    def decay_amount(self) -> int:
         pass
 
     def __init__(self, award: Award) -> None:
         if award is None:
             return
 
-        if award.name != self.VALID_AWARD_NAME:
+        if award.name != self.valid_award_name:
             raise InvalidAwardForProcessor(award.name)
 
         self.award = award
@@ -65,41 +63,41 @@ def retrieve_processor(award: Award) -> QualityDecayProcessor:
 
 class BlueFirst(QualityDecayProcessor):
     @property
-    def VALID_AWARD_NAME(self) -> str:
+    def valid_award_name(self) -> str:
         return "Blue First"
 
     @property
-    def DECAY_AMOUNT(self) -> int:
+    def decay_amount(self) -> int:
         return 1
 
     def decay(self) -> None:
-        self.award.quality += self.DECAY_AMOUNT
+        self.award.quality += self.decay_amount
 
         if self.award.expires_in >= 0:
             return
 
-        self.award.quality += self.DECAY_AMOUNT
+        self.award.quality += self.decay_amount
 
 
 class BlueCompare(QualityDecayProcessor):
     @property
-    def VALID_AWARD_NAME(self) -> str:
+    def valid_award_name(self) -> str:
         return "Blue Compare"
 
     @property
-    def DECAY_AMOUNT(self) -> int:
+    def decay_amount(self) -> int:
         return 1
 
     def decay(self) -> None:
-        self.award.quality += self.DECAY_AMOUNT
+        self.award.quality += self.decay_amount
 
         if self.award.expires_in < 10:
             # decay again
-            self.award.quality += self.DECAY_AMOUNT
+            self.award.quality += self.decay_amount
 
         if self.award.expires_in < 5:
             # decay again again
-            self.award.quality += self.DECAY_AMOUNT
+            self.award.quality += self.decay_amount
 
         if self.award.expires_in >= 0:
             return
@@ -110,11 +108,11 @@ class BlueCompare(QualityDecayProcessor):
 
 class BlueDistinctionPlus(QualityDecayProcessor):
     @property
-    def VALID_AWARD_NAME(self) -> str:
+    def valid_award_name(self) -> str:
         return "Blue Distinction Plus"
 
     @property
-    def DECAY_AMOUNT(self) -> int:
+    def decay_amount(self) -> int:
         return 0
 
     def decay(self):
@@ -123,34 +121,34 @@ class BlueDistinctionPlus(QualityDecayProcessor):
 
 class NormalItem(QualityDecayProcessor):
     @property
-    def VALID_AWARD_NAME(self) -> str:
+    def valid_award_name(self) -> str:
         return "NORMAL ITEM"
 
     @property
-    def DECAY_AMOUNT(self) -> int:
+    def decay_amount(self) -> int:
         return 1
 
     def decay(self):
-        self.award.quality -= self.DECAY_AMOUNT
+        self.award.quality -= self.decay_amount
         if self.award.expires_in >= 0:
             return
 
-        self.award.quality -= self.DECAY_AMOUNT
+        self.award.quality -= self.decay_amount
 
 
 class BlueStar(QualityDecayProcessor):
     @property
-    def VALID_AWARD_NAME(self) -> str:
+    def valid_award_name(self) -> str:
         return "Blue Star"
 
     @property
-    def DECAY_AMOUNT(self) -> int:
+    def decay_amount(self) -> int:
         return 2
 
     def decay(self):
-        self.award.quality -= self.DECAY_AMOUNT
+        self.award.quality -= self.decay_amount
 
         if self.award.expires_in >= 0:
             return
 
-        self.award.quality -= self.DECAY_AMOUNT
+        self.award.quality -= self.decay_amount

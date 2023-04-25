@@ -3,7 +3,7 @@ from award import Award
 
 class AwardQualityDailyDecayJob:
     @classmethod
-    def run_job(self, award: Award) -> None:
+    def run_job(cls, award: Award) -> None:
         if award is None:
             return
 
