@@ -8,7 +8,7 @@ module AwardQualityDecayProcessors
       'NORMAL ITEM' => NormalItem,
       'Blue Star' => BlueStar
     }.fetch(self.name) do |award_name|
-      raise(AwardQualityDecayProcessors::UnknownProcessor.new("No decay processor found for: #{award_name}"))
+      raise(UnknownProcessor.new("No decay processor found for: #{award_name}"))
     end
 
     processor_class.new(award)
