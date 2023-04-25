@@ -1,4 +1,8 @@
+require 'award_quality_decay_processors'
+
 class Award
+  include AwardQualityDecayProcessors
+
   attr_reader :quality
   attr_accessor :name, :expires_in
 
@@ -35,16 +39,7 @@ class Award
   end
 
   def decay_quality
-    processor_class = {
-      'Blue First' => AwardQualityDecayProcessors::BlueFirst,
-      'Blue Compare' => AwardQualityDecayProcessors::BlueCompare,
-      'Blue Distinction Plus' => AwardQualityDecayProcessors::BlueDistinctionPlus,
-      'NORMAL ITEM' => AwardQualityDecayProcessors::NormalItem,
-      'Blue Star' => AwardQualityDecayProcessors::BlueStar
-    }.fetch(self.name) do |award_name|
-      raise(AwardQualityDecayProcessors::UnknownProcessor.new("No decay processor found for: #{award_name}"))
-    end
-
-    processor_class.new(self).decay()
+    # AwardQualityDecayProcessors::retrieve_processor
+    retrieve_processor(self).decay()
   end
 end

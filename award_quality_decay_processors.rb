@@ -1,4 +1,18 @@
 module AwardQualityDecayProcessors
+
+  def retrieve_processor(award)
+    processor_class = {
+      'Blue First' => AwardQualityDecayProcessors::BlueFirst,
+      'Blue Compare' => AwardQualityDecayProcessors::BlueCompare,
+      'Blue Distinction Plus' => AwardQualityDecayProcessors::BlueDistinctionPlus,
+      'NORMAL ITEM' => AwardQualityDecayProcessors::NormalItem,
+      'Blue Star' => AwardQualityDecayProcessors::BlueStar
+    }.fetch(self.name) do |award_name|
+      raise(AwardQualityDecayProcessors::UnknownProcessor.new("No decay processor found for: #{award_name}"))
+    end
+
+    processor_class.new(award)
+  end
   class BlueFirst
     AWARD_NAME = 'Blue First'
     DECAY_AMOUNT = 1
