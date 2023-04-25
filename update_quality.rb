@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'award_quality_daily_decay_job'
 
 def update_quality(awards)

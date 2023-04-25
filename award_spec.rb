@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec'
 require 'award'
 
@@ -23,13 +25,12 @@ RSpec.describe Award, '#quality' do
         a.quality = -55
         expect(a.quality).to eq 0
       end
-    end  
+    end
 
     context 'can never be more than 50' do
       specify 'when constructing' do
         a = Award.new('some name', 1, 304)
         expect(a.quality).to eq 50
-        
       end
       specify 'when changing an instance' do
         a = Award.new('some name', 1, 34)
@@ -42,7 +43,7 @@ RSpec.describe Award, '#quality' do
       it 'will be set to 80' do
         a = Award.new('Blue Distinction Plus', 1, 34)
         expect(a.quality).to eq 80
-      end 
+      end
 
       it 'will never be changed from 80' do
         a = Award.new('Blue Distinction Plus', 1, 34)
