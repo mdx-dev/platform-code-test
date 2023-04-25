@@ -6,7 +6,6 @@ class AwardQualityDailyDecayJob
     return if award.nil?
 
     award.decrement_expires_in
-    award.quality_decay_processor.decay(award)
-
+    award.quality_decay_processor.decay
   end
 end
