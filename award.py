@@ -1,3 +1,6 @@
+from award_quality_decay_processors import retrieve_processor
+
+
 class Award(object):
     def __init__(
         self, name: str = None, expires_in: int = None, quality: int = None
@@ -33,4 +36,4 @@ class Award(object):
         self.expires_in -= amount
 
     def decay_quality(self) -> None:
-        pass
+        retrieve_processor(self).decay()
