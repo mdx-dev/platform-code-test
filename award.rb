@@ -29,11 +29,14 @@ class Award
       @quality = 50
       return
     end
-
-    @quality = quality
   end
 
   def decrement_expires_in(amount=1)
+    # there's no business rule stating the BDP type awards cannot have
+    # their expired_in value changed, but there is a test checking
+    # to make sure the value doesn't change when the update_quality job
+    # runs. that job calls this method so the value doesn't change.
+    # however, you can change it all day long via the writer
     return if self.name.eql? 'Blue Distinction Plus'
     self.expires_in -= amount
   end
