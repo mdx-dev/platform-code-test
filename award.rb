@@ -29,6 +29,8 @@ class Award
       @quality = 50
       return
     end
+
+    @quality = quality
   end
 
   def decrement_expires_in(amount=1)
