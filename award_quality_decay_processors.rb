@@ -2,11 +2,11 @@ module AwardQualityDecayProcessors
 
   def retrieve_processor(award)
     processor_class = {
-      'Blue First' => AwardQualityDecayProcessors::BlueFirst,
-      'Blue Compare' => AwardQualityDecayProcessors::BlueCompare,
-      'Blue Distinction Plus' => AwardQualityDecayProcessors::BlueDistinctionPlus,
-      'NORMAL ITEM' => AwardQualityDecayProcessors::NormalItem,
-      'Blue Star' => AwardQualityDecayProcessors::BlueStar
+      'Blue First' => BlueFirst,
+      'Blue Compare' => BlueCompare,
+      'Blue Distinction Plus' => BlueDistinctionPlus,
+      'NORMAL ITEM' => NormalItem,
+      'Blue Star' => BlueStar
     }.fetch(self.name) do |award_name|
       raise(AwardQualityDecayProcessors::UnknownProcessor.new("No decay processor found for: #{award_name}"))
     end
@@ -14,7 +14,7 @@ module AwardQualityDecayProcessors
     processor_class.new(award)
   end
   class BlueFirst
-    AWARD_NAME = 'Blue First'
+    VALID_AWARD_NAME = 'Blue First'
     DECAY_AMOUNT = 1
 
     attr_accessor :award
@@ -22,7 +22,7 @@ module AwardQualityDecayProcessors
     def initialize(award)
       return if award.nil?
 
-      raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
+      raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
       self.award = award
     end
@@ -37,7 +37,7 @@ module AwardQualityDecayProcessors
   end
 
   class BlueCompare
-    AWARD_NAME = 'Blue Compare'
+    VALID_AWARD_NAME = 'Blue Compare'
     DECAY_AMOUNT = 1
 
     attr_accessor :award
@@ -45,7 +45,7 @@ module AwardQualityDecayProcessors
     def initialize(award)
       return if award.nil?
 
-      raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
+      raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
       self.award = award
     end
@@ -67,7 +67,7 @@ module AwardQualityDecayProcessors
   end
 
   class BlueDistinctionPlus
-    AWARD_NAME = 'Blue Distinction Plus'
+    VALID_AWARD_NAME = 'Blue Distinction Plus'
     DECAY_AMOUNT = 0
 
     attr_accessor :award
@@ -75,7 +75,7 @@ module AwardQualityDecayProcessors
     def initialize(award)
       return if award.nil?
 
-      raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
+      raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
       self.award = award
     end
@@ -84,7 +84,7 @@ module AwardQualityDecayProcessors
   end
 
   class NormalItem
-    AWARD_NAME = 'NORMAL ITEM'
+    VALID_AWARD_NAME = 'NORMAL ITEM'
     DECAY_AMOUNT = 1
 
     attr_accessor :award
@@ -92,7 +92,7 @@ module AwardQualityDecayProcessors
     def initialize(award)
       return if award.nil?
 
-      raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
+      raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
       self.award = award
     end
@@ -107,7 +107,7 @@ module AwardQualityDecayProcessors
   end
 
   class BlueStar
-    AWARD_NAME = 'Blue Star'
+    VALID_AWARD_NAME = 'Blue Star'
     DECAY_AMOUNT = 2
 
     attr_accessor :award
@@ -115,7 +115,7 @@ module AwardQualityDecayProcessors
     def initialize(award)
       return if award.nil?
 
-      raise InvalidAward.new(award.name) unless award.name.eql? AWARD_NAME
+      raise InvalidAward.new(award.name) unless award.name.eql? VALID_AWARD_NAME
 
       self.award = award
     end
