@@ -8,7 +8,7 @@ RSpec.describe AwardQualityDailyDecayJob do
       allow(processor).to receive(:decay)
 
       award = Award.new('some name', 10, 100)
-      allow(award).to receive(:quality_decay_processor).and_return(processor)
+      allow(award).to receive(:decay_quality)
       AwardQualityDailyDecayJob.update(award)
 
       expect(award.expires_in).to eq 9

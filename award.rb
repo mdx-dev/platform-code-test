@@ -34,7 +34,7 @@ class Award
     self.expires_in -= amount
   end
 
-  def quality_decay_processor
+  def decay_quality
     processor_class = {
       'Blue First' => AwardQualityDecayProcessors::BlueFirst,
       'Blue Compare' => AwardQualityDecayProcessors::BlueCompare,
@@ -45,6 +45,6 @@ class Award
       raise(AwardQualityDecayProcessors::UnknownProcessor.new("No decay processor found for: #{award_name}"))
     end
 
-    return processor_class.new(self)
+    processor_class.new(self).decay()
   end
 end
