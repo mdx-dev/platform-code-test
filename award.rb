@@ -15,24 +15,15 @@ class Award
   end
 
   def quality=(quality)
-    if name.eql? 'Blue Distinction Plus'
-      @quality = 80
-      return
-    end
-
-    # quality can never be negative
-    if quality.negative?
-      @quality = 0
-      return
-    end
-
-    # quality can never be more than 50
-    if quality > 50
-      @quality = 50
-      return
-    end
-
-    @quality = quality
+    @quality = if name.eql?('Blue Distinction Plus')
+                 80
+               elsif (0..50).cover?(quality)
+                 quality
+               elsif quality.negative?
+                 0
+               else
+                 50
+               end
   end
 
   def decrement_expires_in(amount = 1)
