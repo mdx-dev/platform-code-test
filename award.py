@@ -23,3 +23,8 @@ class Award(object):
             return
 
         self._quality = value
+
+    def decrement_expires_in(self, amount=1):
+        if self.name == "Blue Distinction Plus":
+            return
+        self.expires_in -= amount

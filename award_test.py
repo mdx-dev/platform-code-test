@@ -37,3 +37,19 @@ def test_award_quality_for_blue_distinction_plus_is_always_eighty():
 
     award.quality = -5
     assert award.quality == 80
+
+
+def test_award_decrement_expires_in_does_not_change_blue_distinction_plus():
+    award = Award("Blue Distinction Plus", 10, 200)
+    assert award.expires_in == 10
+
+    award.decrement_expires_in()
+    assert award.expires_in == 10
+
+
+def test_award_expires_in_setter_does_change_blue_distinction_plus():
+    award = Award("Blue Distinction Plus", 10, 200)
+    assert award.expires_in == 10
+
+    award.expires_in = 50
+    assert award.expires_in == 50
