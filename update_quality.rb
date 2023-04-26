@@ -1,5 +1,8 @@
-require 'award'
-require 'award_manager'
+require './award'
+require './award_manager'
+require './mass_award_manager'
+require './class_award_manager'
+require 'benchmark'
 
 # def update_quality(awards)
 #   awards.each do |award|
@@ -56,3 +59,17 @@ def update_quality(awards)
     AwardManager.new(award).update_quality
   end
 end
+
+def mass_update_quality(awards)
+  MassAwardManager.new(awards).update_quality
+end
+
+def class_update_quality(awards)
+  awards.each { |award| ClassAwardManager.update_quality(award) }
+end
+
+awards = (1..10000000).map {  Award.new('NORMAL ITEM', 5, 10) }
+
+puts "single award update: #{Benchmark.measure { update_quality(awards) }}"
+puts "mass award update: #{Benchmark.measure { mass_update_quality(awards) }}"
+puts "class award update: #{Benchmark.measure { class_update_quality(awards) }}"
