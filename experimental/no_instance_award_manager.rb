@@ -1,4 +1,4 @@
-class ClassAwardManager
+class NoInstanceAwardManager
   def self.update_quality(award)
     unless award.name == 'Blue Distinction Plus'
       case award.name
@@ -37,7 +37,7 @@ class ClassAwardManager
   # quality increases by 2 on the day of expiration and after
   # quality can't be greater than 50
   
-  def blue_first(award)
+  def self.blue_first(award)
     if award.quality < 50
       if award.expires_in > 0
         award.quality += 1
@@ -54,7 +54,7 @@ class ClassAwardManager
   # quality increases by 3 when expires_in <= 5
   # quality = 0 when expires_in <= 0
 
-  def blue_compare(award)
+  def self.blue_compare(award)
     if award.quality < 50
       if award.expires_in > 10
         award.quality += 1
@@ -73,7 +73,7 @@ class ClassAwardManager
   # quality degrades by 2 before the expiration
   # quality degrades by 4 after the expiration
 
-  def blue_star(award)
+  def self.blue_star(award)
     if award.expires_in > 0 && award.quality > 0
       award.quality -= 2
     elsif award.expires_in <= 0 && award.quality > 0

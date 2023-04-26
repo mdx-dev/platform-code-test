@@ -1,4 +1,4 @@
-class MassAwardManager
+class AwardsManager
   attr_accessor :awards
 
   def initialize(awards)

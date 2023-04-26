@@ -1,4 +1,4 @@
-class AwardManager
+class SingleAwardManager
   attr_accessor :award
 
   def initialize(award)
