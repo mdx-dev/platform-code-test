@@ -17,11 +17,11 @@ Pretty basic. But here is where it gets interesting...
 
   - The quality of an award is never negative.
 
-  - "Blue First" awards actually increase in quality the older they get
+  - "Blue First" awards actually increase in quality the older they get.
 
-  - The quality of an award is never more than 50
+  - The quality of an award is never more than 50.
 
-  - "Blue Distinction Plus", being a highly sought distinction, never decreases in quality
+  - "Blue Distinction Plus", being a highly sought distinction, never decreases in quality.
 
   - "Blue Compare", similar to "Blue First", increases in quality as the expiration date approaches; Quality increases by 2 when there are 10 days or less left, and by 3 where there are 5 days or less left, but quality value drops to 0 after the expiration date.
 
