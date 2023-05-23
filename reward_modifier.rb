@@ -2,39 +2,54 @@ require 'award'
 
 class RewardModifier
   attr_accessor :awards
-
+  WHITE_LIST = ['Blue First', 'Blue Compare', 'Blue Distinction Plus']
   def initialize(awards)
     @awards = awards
   end
 
   def update_quality
-    white_list_for_rewards = ['Blue First', 'Blue Compare', 'Blue Distinction Plus']
+
     awards.each do |award|
-      if !white_list_for_rewards.include?(award.name)
-        award.decrease_quality(1) if !award.quality.zero? && award.name != 'Blue Star'
-        award.decrease_quality(2) if !award.quality.zero? && award.name == 'Blue Star'
-      else
-        award.increase_quality(1) if award.quality < 50
-        if award.name == 'Blue Compare'
-          award.increase_quality(1) if award.expires_in < 11 && award.quality < 50
-          award.increase_quality(1) if award.expires_in < 6 && award.quality < 50
-        end
+      calcualte_quality(award)
+      modify_expiration_date(award)
+      calculate_expired_quality(award) if expiration_passed?(award)
+    end
+  end
+
+  def modify_expiration_date(award)
+    award.expires_in -= 1 if award.name != 'Blue Distinction Plus'
+  end
+
+  def calcualte_quality(award)
+    case award.name
+    when *WHITE_LIST
+      award.increase_quality(1) if award.quality < 50
+      if award.name == 'Blue Compare'
+        award.increase_quality(1) if award.expires_in < 11 && award.quality < 50
+        award.increase_quality(1) if award.expires_in < 6 && award.quality < 50
       end
-
-      award.expires_in -= 1 if award.name != 'Blue Distinction Plus'
-
-      if award.expires_in < 0
-        if award.name != 'Blue First'
-          if award.name != 'Blue Compare'
-            award.decrease_quality(1) if award.name != 'Blue Distinction Plus' && award.quality > 0 && award.name != 'Blue Star'
-            award.decrease_quality(2) if award.name == 'Blue Star' && award.quality > 0
-          else
-            award.quality = award.quality - award.quality
-          end
-        end
-        award.increase_quality(1) if award.name == 'Blue First' && award.quality < 50
+    else
+      if !award.quality.zero? && award.name != 'Blue Star'
+        award.decrease_quality(1)
+      elsif !award.quality.zero? && award.name == 'Blue Star'
+        award.decrease_quality(2)
       end
     end
   end
 
+  def expiration_passed?(award)
+    award.expires_in < 0
+  end
+
+  def calculate_expired_quality(award)
+    if award.name != 'Blue First'
+      if award.name != 'Blue Compare'
+        award.decrease_quality(1) if award.name != 'Blue Distinction Plus' && award.quality > 0 && award.name != 'Blue Star'
+        award.decrease_quality(2) if award.name == 'Blue Star' && award.quality > 0
+      else
+        award.quality = award.quality - award.quality
+      end
+    end
+    award.increase_quality(1) if award.name == 'Blue First' && award.quality < 50
+  end
 end
