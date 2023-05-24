@@ -3,6 +3,7 @@ require 'award'
 class RewardModifier
   attr_accessor :awards
   WHITE_LIST = ['Blue First', 'Blue Compare', 'Blue Distinction Plus']
+
   def initialize(awards)
     @awards = awards
   end
