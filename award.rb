@@ -1,34 +1,51 @@
-# Award = Struct.new(:name, :expires_in, :quality)
 class Award
-    attr_accessor,:expires_in,:quality
-    def initiliaze(name, expires_in,quality)
-        self.name = name
-        self.expires_in = expires_in
-        self.quality = quality
+  attr_accessor :name, :expires_in, :quality
+
+  def initialize(name, expires_in, quality)
+    @name = name
+    @expires_in = expires_in
+    @quality = quality
+  end
+
+  def update_quality
+    return if name == 'Blue Distinction Plus'
+
+    if name == 'Blue First'
+      update_blue_first
+    elsif name == 'Blue Compare'
+      update_blue_compare
+    else
+      update_normal
     end
 
-    def calculate_quality_value
-        if name == 'Blue First'
-            self.quality +=1
-        elsif name == 'Blue Compare'
-            if expires_in <= 0
-                self.equal  = 0
-                elsif expires_in <= 5
-                    self.quality += 3
-                elsif expires_in <= 10
-                    self.quality += 2
-                else 
-                    self.quality += 1
-                end
-            elsif name == 'Blue Star'
-                # Blue star awards lose quality value twice as fast
-                self.quality -= 2;
-            elsif name !- 'Blue Distinctio Plus' && quality.positve?
-                self.quality = 50 if quality > 50
-                self.quality = 0 if quality,negative?
-            end
+    self.expires_in -= 1 unless name == 'Blue Distinction Plus'
+    self.quality = [quality, 0].max
+    self.quality = [quality, 50].min unless name == 'Blue Distinction Plus'
+  end
 
-    def update_expire_date
-        self.expires_in -=1 unless_name = 'Blue Distinction'
-    end
+  private
+
+  def update_blue_first
+    return if quality >= 50
+
+    self.quality += 1
+    self.quality += 1 if expires_in <= 0
+  end
+
+  def update_blue_compare
+    return self.quality = 0 if expires_in <= 0
+
+    quality_increase = 1
+    quality_increase += 1 if expires_in <= 10
+    quality_increase += 1 if expires_in <= 5
+    self.quality += quality_increase
+  end
+
+  def update_normal
+    return if quality <= 0
+
+    quality_degrade = expires_in <= 0 ? 2 : 1
+    quality_degrade *= 2 if name == 'Blue Star'
+    self.quality -= quality_degrade
+  end
 end
